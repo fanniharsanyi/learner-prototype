@@ -37,6 +37,7 @@ function mountStudentChrome(active) {
       <span class="s-header__home">HOME</span>
       <nav class="s-header__actions">
         <a class="s-act" href="#">${icoFaq} FAQs</a>
+        <span class="s-act__div"></span>
         <a class="s-act" href="#">${icoUser} Profile</a>
         <a class="s-act" href="#">${icoOut} Log out</a>
       </nav>
@@ -45,7 +46,7 @@ function mountStudentChrome(active) {
   <div class="s-subnav">
     <div class="s-subnav__in">
       ${NAV.map(([label, href, key]) =>
-        `<a href="${href}"${key === active ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
+        `<a href="${href}"${key === active ? ' aria-current="page"' : ''}>${label}</a>`).join('<span class="s-subnav__div"></span>')}
       <span class="s-subnav__spacer"></span>
       <button class="s-search" onclick="flashToast('Opens the CVC course search'); showPendingToast();">
         Search for Classes

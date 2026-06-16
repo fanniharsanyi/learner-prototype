@@ -86,36 +86,35 @@ img { max-width: 100%; display: block; }
   color: var(--c-primary);
 }
 .s-header__actions { display: flex; align-items: center; gap: 18px; }
-.s-act { display: inline-flex; align-items: center; gap: 6px; color: var(--c-ink); font-weight: 600; font-size: 13px; }
+.s-act { display: inline-flex; align-items: center; gap: 8px; color: var(--c-primary); font-weight: 500; font-size: 13px; }
 .s-act svg { width: 16px; height: 16px; color: var(--c-gold); }
-.s-act:hover { text-decoration: none; color: var(--c-primary); }
+.s-act:hover { text-decoration: none; color: var(--c-primary-hover); }
+.s-act__div { width: 1px; height: 22px; background: var(--gray-400); }
 
 .s-subnav { background: var(--c-primary); }
 .s-subnav__in {
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 16px 28px;
   display: flex;
   align-items: center;
-  gap: 26px;
-  min-height: 44px;
+  gap: 12px;
 }
 .s-subnav a {
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  padding: 12px 0;
-  border-bottom: 3px solid transparent;
 }
 .s-subnav a:hover { text-decoration: none; opacity: .9; }
-.s-subnav a[aria-current='page'] { border-bottom-color: var(--c-gold); }
+.s-subnav a[aria-current='page'] { font-weight: 700; text-decoration: underline; }
+.s-subnav__div { width: 1px; height: 20px; background: #bbb; flex: 0 0 auto; }
 .s-subnav__spacer { margin-left: auto; }
 .s-search {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--c-gold); color: var(--c-ink);
-  font-weight: 700; font-size: 13px;
-  border: none; border-radius: var(--radius-field);
-  padding: 8px 16px; cursor: pointer;
+  background: var(--c-gold); color: #000;
+  font-weight: 600; font-size: 14px; line-height: 21px;
+  border: none; border-radius: 14px;
+  padding: 4px 16px; height: 29px; cursor: pointer;
 }
 .s-search:hover { background: var(--c-gold-hover); }
 
@@ -139,23 +138,28 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    Page scaffold + shared bits
    ============================================================ */
-.page { max-width: var(--page-max); margin: 0 auto; padding: 28px 24px 8px; }
-.h1 { font-size: 30px; font-weight: 700; color: var(--c-ink); margin: 0 0 6px; }
+.page { max-width: var(--page-max); margin: 0 auto; padding: 40px 24px 8px; }
+.h1 { font-size: 30px; font-weight: 700; color: #2f2f2f; line-height: 45px; margin: 0 0 8px; }
 .lede { color: var(--gray-700); margin: 0 0 24px; max-width: 720px; }
+.page-desc { color: #000; font-size: 14px; line-height: 21px; margin: 0 0 24px; }
 .back { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 13px; margin-bottom: 14px; }
 .muted { color: var(--gray-600); }
 
+/* Buttons match the Figma "QUOTTLY - Button": pill (radius 18px), 14px SemiBold,
+   px 32 / py 10, 2px border. Filled (blue) and outline (white + blue border). */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  font-family: inherit; font-size: 14px; font-weight: 600;
-  border-radius: var(--radius-field); padding: 10px 18px;
-  border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  font-family: inherit; font-size: 14px; font-weight: 600; line-height: 18px;
+  border-radius: 18px; padding: 10px 32px;
+  border: 2px solid transparent; cursor: pointer; text-decoration: none;
 }
-.btn--primary { background: var(--c-primary); color: #fff; }
-.btn--primary:hover { background: var(--c-primary-hover); text-decoration: none; }
+.btn--primary { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+.btn--primary:hover { background: var(--c-primary-hover); border-color: var(--c-primary-hover); text-decoration: none; }
+.btn--outline { background: #fff; color: var(--c-primary); border-color: var(--c-primary); }
+.btn--outline:hover { background: var(--blue-50); text-decoration: none; }
 .btn--ghost { background: #fff; color: var(--c-primary); border-color: var(--gray-300); }
 .btn--ghost:hover { background: var(--gray-100); text-decoration: none; }
-.btn--sm { padding: 7px 14px; font-size: 13px; }
+.btn--sm { padding: 6px 18px; font-size: 13px; border-radius: 14px; }
 
 .tag {
   display: inline-flex; align-items: center; gap: 5px;
@@ -164,7 +168,8 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--gray-300); color: var(--gray-700); background: #fff;
 }
 .tag svg { width: 12px; height: 12px; }
-.tag--invited { border-color: var(--c-gold); color: var(--amber-700); background: #FFFBF0; }
+/* "Your home institution invited" = info pill (Pill v2, color=info) */
+.tag--invited { border-color: #2b7abc; color: #2871af; background: #fff; border-radius: 8px; font-weight: 600; padding: 4px 10px; }
 .tag--required { border-color: #E3B7B5; color: #B91C1C; }
 .tag--choose { border-color: #C9B36B; color: var(--amber-700); }
 .tag--home { border-color: #E3B7B5; color: #B91C1C; }
@@ -199,17 +204,24 @@ img { max-width: 100%; display: block; }
 .clear-filter { font-weight: 600; font-size: 13px; }
 
 .collab-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
 }
 .collab-card {
-  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-card);
-  padding: 20px; display: flex; flex-direction: column; gap: 12px; cursor: pointer;
+  background: #fff; border: 1px solid #e8eaec; border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.06);
+  padding: 24px; display: flex; flex-direction: column; gap: 16px; cursor: pointer;
   transition: box-shadow .15s, border-color .15s;
 }
-.collab-card:hover { border-color: var(--c-primary); box-shadow: 0 4px 16px rgba(25,83,168,.12); }
-.collab-card__title { color: var(--c-primary); font-size: 16px; font-weight: 700; }
-.collab-card__desc { color: var(--gray-700); font-size: 13px; flex: 1 1 auto; }
-.collab-card__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.collab-card:hover { border-color: var(--c-primary); box-shadow: 0 6px 18px rgba(25,83,168,.14); }
+.collab-card__title { color: var(--c-primary); font-size: 20px; font-weight: 700; line-height: 25px; }
+.collab-card__desc { color: #273540; font-size: 14px; line-height: 21px; flex: 1 1 auto; }
+.collab-card__tags { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; padding-top: 16px; border-top: 1px solid #e8eaec; }
+/* Institution chips: rounded rectangles, not pills */
+.inst {
+  display: inline-flex; align-items: center;
+  background: #fff; border: 1px solid #e1e1e1; border-radius: 8px;
+  padding: 8px 12px; font-size: 14px; font-weight: 600; color: #222;
+}
 
 /* ============================================================
    Collaborative detail

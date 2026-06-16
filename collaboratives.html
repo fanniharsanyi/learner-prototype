@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regional Collaboratives · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=2">
+<link rel="stylesheet" href="assets/styles.css?v=3">
 </head>
 <body>
 <main>
   <div class="page">
     <h1 class="h1">Regional Collaboratives</h1>
-    <p class="lede">Explore strategic partnerships between California Community Colleges. Join a collaborative your home institution is part of to take courses across member colleges.</p>
+    <p class="page-desc">Explore strategic partnerships between California Community Colleges.</p>
 
     <form class="filter-bar" id="collab-filter">
       <div class="field field--grow">
@@ -24,7 +24,7 @@
           <option>Touro University</option>
         </select>
       </div>
-      <button type="submit" class="btn btn--primary">Filter</button>
+      <button type="submit" class="btn btn--outline">Filter</button>
       <a class="clear-filter" href="collaboratives.html">Clear Filter</a>
     </form>
 
@@ -33,43 +33,43 @@
         <div class="collab-card__title">Southern CA Health Sciences Network</div>
         <p class="collab-card__desc">Expanding access to nursing, pharmacy technology, and allied health programs across Southern California colleges.</p>
         <span class="tag tag--invited"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6L5.7 21 8 13.8 2 9.4h7.6z"/></svg> Your home institution invited</span>
-        <div class="collab-card__tags"><span class="tag">UCLA</span><span class="tag">USC</span></div>
+        <div class="collab-card__tags"><span class="inst">UCLA</span><span class="inst">USC</span></div>
       </article>
 
       <article class="collab-card" onclick="go('collaborative-detail.html')">
         <div class="collab-card__title">Bay Area STEM Collaborative</div>
         <p class="collab-card__desc">A shared catalog of engineering, computer science, and data programs among Bay Area partner colleges.</p>
         <span class="tag tag--invited"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6L5.7 21 8 13.8 2 9.4h7.6z"/></svg> Your home institution invited</span>
-        <div class="collab-card__tags"><span class="tag">UCLA</span><span class="tag">USC</span></div>
+        <div class="collab-card__tags"><span class="inst">UCLA</span><span class="inst">USC</span></div>
       </article>
 
       <article class="collab-card" onclick="go('collaborative-detail.html')">
         <div class="collab-card__title">Central Valley Education Alliance</div>
         <p class="collab-card__desc">Teacher preparation and education pathways shared across Central Valley community colleges.</p>
-        <div class="collab-card__tags"><span class="tag">Sonoma State University</span><span class="tag">USC</span></div>
+        <div class="collab-card__tags"><span class="inst">Sonoma State University</span><span class="inst">USC</span></div>
       </article>
 
       <article class="collab-card" onclick="go('collaborative-detail.html')">
         <div class="collab-card__title">Inland Empire Tech Collaborative</div>
         <p class="collab-card__desc">Cybersecurity, networking, and IT support pathways built with regional employer input.</p>
-        <div class="collab-card__tags"><span class="tag">Sonoma State University</span><span class="tag">UC San Francisco</span></div>
+        <div class="collab-card__tags"><span class="inst">Sonoma State University</span><span class="inst">UC San Francisco</span></div>
       </article>
 
       <article class="collab-card" onclick="go('collaborative-detail.html')">
         <div class="collab-card__title">North Bay Workforce Partnership</div>
         <p class="collab-card__desc">Stackable certificates in business, hospitality, and trades for working learners.</p>
-        <div class="collab-card__tags"><span class="tag">Sonoma State University</span><span class="tag">USC</span></div>
+        <div class="collab-card__tags"><span class="inst">Sonoma State University</span><span class="inst">USC</span></div>
       </article>
 
       <article class="collab-card" onclick="go('collaborative-detail.html')">
         <div class="collab-card__title">San Diego Regional Arts Network</div>
         <p class="collab-card__desc">Visual arts, design, and media production programs shared across San Diego colleges.</p>
-        <div class="collab-card__tags"><span class="tag">Touro University</span><span class="tag">USC</span></div>
+        <div class="collab-card__tags"><span class="inst">Touro University</span><span class="inst">USC</span></div>
       </article>
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=2"></script>
+<script src="assets/app.js?v=3"></script>
 <script>mountStudentChrome('collaboratives');</script>
 </body>
 </html>
