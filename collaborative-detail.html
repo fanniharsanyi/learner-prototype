@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Southern CA Health Sciences Network · CVC Exchange</title>
+<link rel="stylesheet" href="assets/styles.css?v=1">
+</head>
+<body>
+<main>
+  <div class="page">
+    <a class="back" href="collaboratives.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      Back to Collaboratives
+    </a>
+
+    <div class="collab-banner">
+      <h1>Southern CA Health Sciences Network</h1>
+      <p>A partnership of Southern California colleges expanding access to health sciences programs — from nursing to pharmacy technology. Browse the shared programs below and pick a pathway to get started.</p>
+      <div class="collab-banner__tags"><span class="tag">UCLA</span><span class="tag">USC</span><span class="tag">Sonoma State University</span></div>
+    </div>
+
+    <h2 class="h1" style="font-size:20px;margin-bottom:14px;">Programs in this collaborative</h2>
+    <div class="program-list">
+      <article class="program-row" onclick="go('program-detail.html')">
+        <div class="program-row__body">
+          <div class="program-row__title">Registered Nursing (RN)</div>
+          <div class="program-row__desc">Connecting Southern California colleges to expand access to health sciences programs — from nursing to pharmacy technology.</div>
+          <div class="program-row__meta"><span>3 requirements</span><span>Effective Fall 2019 – Current</span></div>
+        </div>
+        <span class="program-row__arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+      </article>
+
+      <article class="program-row" onclick="toastNow('Pharmacy Technician detail is part of the full build')">
+        <div class="program-row__body">
+          <div class="program-row__title">Pharmacy Technician</div>
+          <div class="program-row__desc">Prepare for pharmacy technician certification with coursework shared across member colleges.</div>
+          <div class="program-row__meta"><span>4 requirements</span><span>Effective Spring 2021 – Current</span></div>
+        </div>
+        <span class="program-row__arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+      </article>
+
+      <article class="program-row" onclick="toastNow('Medical Assisting detail is part of the full build')">
+        <div class="program-row__body">
+          <div class="program-row__title">Medical Assisting</div>
+          <div class="program-row__desc">Clinical and administrative training for entry into medical assisting roles.</div>
+          <div class="program-row__meta"><span>3 requirements</span><span>Effective Fall 2022 – Current</span></div>
+        </div>
+        <span class="program-row__arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+      </article>
+    </div>
+  </div>
+</main>
+<script src="assets/app.js?v=1"></script>
+<script>mountStudentChrome('collaboratives');</script>
+</body>
+</html>
