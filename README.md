@@ -6,9 +6,12 @@ The student-facing (learner) side of the CCS Cross-Enrollment (CVC) Collaborativ
 
 ## The flow
 
+0. **`dashboard.html` — Learner dashboard (Version 1).** The current dashboard extended with the **Collaborative feature** (pathway cards with progress) and **past courses** — every current and past course is tagged with the **program** and the **collaborative** it counts toward. **`dashboard-v2.html`** is the lower-priority **Version 2**: a rethought, scannable, action-first layout (progress snapshot, "up next" tasks, tabbed courses). A banner at the top of each switches between them.
 1. **`collaboratives.html` — Regional Collaboratives.** The explore landing: filter by home institution and browse collaborative cards (with "your home institution invited" pills and partner-college tags).
 2. **`collaborative-detail.html` — a collaborative's programs.** Banner plus the list of programs inside the collaborative. (Added so the path is Explore → Collaborative → Program; the Figma node jumped straight from explore to a program.)
-3. **`program-detail.html` — the program (Registered Nursing).** About, a 3-step "how it works" (Select → Enroll → Track), contact info, and the **program requirements** with the same AND / OR / "choose one" / "home institution only" logic as the admin side, shown with learner progress: Completed / In Progress pills, progress bars, enrolled courses, and "View available courses."
+3. **`program-detail.html` — the program (Registered Nursing).** About, a 3-step "how it works" (Select → Enroll → Track), contact info, and the **program requirements**. Two requirement treatments (switch with the banner at the top):
+   - **Version A — `program-detail.html`:** close to today, made clearer — the AND / OR / "choose one" / "home institution only" card list with status pills, progress bars, enrolled courses, and "View available courses."
+   - **Version B — `program-detail-ideal.html` (the ideal):** a sticky progress rail (overall ring + a clickable requirement checklist) next to an accordion (one requirement open at a time), with "choose one" shown as a clear pick. Scannable, with a persistent sense of what's next.
 
 `index.html` redirects to `collaboratives.html`.
 

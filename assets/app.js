@@ -12,7 +12,7 @@ function seal(size) {
 }
 
 const NAV = [
-  ['Dashboard', 'index.html', 'dashboard'],
+  ['Dashboard', 'dashboard.html', 'dashboard'],
   ['Collaboratives', 'collaboratives.html', 'collaboratives'],
   ['Class Schedule', '#', 'schedule'],
   ['Favorite Courses', '#', 'favorites'],
@@ -116,7 +116,7 @@ const CATALOG = {
 /* ---- Course enroll modal ---- */
 function openCourseModal(reqId, title) {
   const courses = CATALOG[reqId] || [];
-  const card = document.querySelector(`.req-card[data-req="${reqId}"]`);
+  const card = document.querySelector(`[data-req="${reqId}"]`);
   const ov = document.createElement('div');
   ov.className = 'modal-ov';
   ov.innerHTML = `
@@ -168,6 +168,7 @@ function addEnrolledCourse(card, course) {
   card.dataset.done = done;
   updateProgress(card);
   if (need && done >= need) markComplete(card);
+  if (typeof refreshIdeal === 'function') refreshIdeal();
 }
 
 function updateProgress(card) {
@@ -200,3 +201,61 @@ function initCollabFilter() {
   });
 }
 document.addEventListener('DOMContentLoaded', initCollabFilter);
+
+/* ---- Ideal program-details: accordion + stepper + overall progress ---- */
+function initIdeal() {
+  const root = document.querySelector('.req-ideal');
+  if (!root) return;
+  root.querySelectorAll('.acc-head').forEach(h => {
+    h.addEventListener('click', () => h.closest('.acc-item').classList.toggle('is-open'));
+  });
+  root.querySelectorAll('.rail-step').forEach(s => {
+    s.addEventListener('click', () => {
+      const item = root.querySelector(`.acc-item[data-acc="${s.dataset.step}"]`);
+      if (item) { item.classList.add('is-open'); item.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    });
+  });
+  refreshIdeal();
+}
+
+function refreshIdeal() {
+  const root = document.querySelector('.req-ideal');
+  if (!root) return;
+  const items = [...root.querySelectorAll('.acc-item')];
+  let done = 0;
+  items.forEach(item => {
+    let complete;
+    if (item.dataset.acc === 'choose') {
+      complete = [...item.querySelectorAll('[data-req]')].some(o =>
+        +o.dataset.required > 0 && (+o.dataset.done || 0) >= +o.dataset.required);
+    } else {
+      complete = +item.dataset.required > 0 && (+item.dataset.done || 0) >= +item.dataset.required;
+    }
+    item.dataset.status = complete ? 'done' : 'progress';
+    const rail = root.querySelector(`.rail-step[data-step="${item.dataset.acc}"]`);
+    if (rail) rail.dataset.status = complete ? 'done' : 'progress';
+    if (complete) done++;
+  });
+  const total = items.length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const ring = root.querySelector('.prog-rail .ring');
+  if (ring) { ring.style.setProperty('--p', pct); ring.querySelector('span').textContent = `${done}/${total}`; }
+  const note = root.querySelector('.prog-rail__pct b');
+  if (note) note.textContent = `${done} of ${total} requirements`;
+}
+document.addEventListener('DOMContentLoaded', initIdeal);
+
+/* ---- Dashboard V2 tabs (current / past courses) ---- */
+function initTabs() {
+  document.querySelectorAll('.tabbar').forEach(bar => {
+    const btns = [...bar.querySelectorAll('button')];
+    btns.forEach(btn => btn.addEventListener('click', () => {
+      btns.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+      const target = btn.dataset.tab;
+      document.querySelectorAll('[data-pane]').forEach(p => {
+        p.style.display = p.dataset.pane === target ? '' : 'none';
+      });
+    }));
+  });
+}
+document.addEventListener('DOMContentLoaded', initTabs);
