@@ -499,3 +499,45 @@ img { max-width: 100%; display: block; }
   .dash2__side, .prog-rail { position: static; }
   .course { flex-wrap: wrap; }
 }
+
+/* ============================================================
+   Learner dashboard V1 — current student dashboard, extended
+   ============================================================ */
+.signin-banner { display:flex; gap:10px; align-items:center; background: var(--blue-50); border:1px solid #CFE0F5; border-radius:8px; padding:10px 14px; font-size:13px; color:var(--c-text); margin-bottom:24px; }
+.signin-banner .dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--c-primary); flex:none; }
+.signin-banner b { color: var(--c-ink); }
+
+.dash-grid { display:grid; grid-template-columns:1fr 320px; gap:22px; align-items:start; }
+@media (max-width:900px){ .dash-grid { grid-template-columns:1fr; } }
+
+.notif { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-card); padding:18px; }
+.notif h3 { margin:0 0 10px; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--gray-600); }
+.notif p { margin:0 0 8px; font-size:13px; color:var(--gray-700); }
+
+/* generic learner table (Class Schedule / Favorite / Saved / Past Courses) */
+.tbl { width:100%; border-collapse:collapse; font-size:14px; background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-card); overflow:hidden; }
+.tbl thead th { text-align:left; background:var(--gray-100); border-bottom:2px solid var(--c-gold); padding:11px 16px; font-size:12px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--gray-600); }
+.tbl tbody td { padding:13px 16px; border-bottom:1px solid var(--gray-200); vertical-align:middle; color:var(--c-text); }
+.tbl tbody tr:last-child td { border-bottom:0; }
+.tbl tbody tr:hover td { background:var(--gray-100); }
+.tbl .empty-row td { color:var(--gray-600); }
+.tbl .empty-row:hover td { background:#fff; }
+.tbl .grade { font-weight:800; color:var(--green-700); }
+.tbl-note { font-size:12px; color:var(--gray-600); padding:10px 16px; border-top:1px solid var(--gray-200); background:var(--gray-100); }
+.tbl-wrap { border:1px solid var(--gray-200); border-radius:var(--radius-card); overflow:hidden; }
+.tbl-wrap .tbl { border:0; border-radius:0; }
+.cta-row { margin-top:14px; }
+.ct-cell { display:flex; flex-wrap:wrap; gap:6px; }
+
+/* Regional collaboratives — refined collaborative feature */
+.collab-cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:760px){ .collab-cards { grid-template-columns:1fr; } }
+.collab-card { display:flex; gap:14px; align-items:center; background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-card); padding:18px; text-decoration:none; color:inherit; transition:box-shadow .12s, border-color .12s; }
+.collab-card:hover { box-shadow:0 2px 10px rgba(0,0,0,.07); border-color:var(--gray-300); text-decoration:none; }
+.collab-card__body { flex:1; min-width:0; }
+.collab-card__collab { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--gray-600); }
+.collab-card__prog { font-size:17px; font-weight:700; color:var(--c-ink); margin:2px 0 12px; }
+.collab-card__stats { display:flex; gap:26px; margin-bottom:10px; }
+.collab-card__stats div { font-size:12px; color:var(--gray-600); }
+.collab-card__stats b { display:block; font-size:14px; font-weight:700; color:var(--c-text); }
+.collab-card__chev { color:var(--gray-400); flex:none; }

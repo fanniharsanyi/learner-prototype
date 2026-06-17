@@ -4,130 +4,119 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=3">
+<link rel="stylesheet" href="assets/styles.css?v=4">
 </head>
 <body>
 <main>
   <div class="page">
     <div class="vswitch">
-      <b>Learner dashboard</b> — Version 1: the current dashboard extended with collaborative pathways and past courses.
+      <b>Learner dashboard</b> — Version 1: the current student dashboard, extended with Regional Collaboratives and past courses.
       <span class="vswitch__links">
         <a href="dashboard.html" aria-current="page">V1 · Extended</a>
         <a href="dashboard-v2.html">V2 · Rethought</a>
       </span>
     </div>
 
-    <h1 class="h1">Welcome back, Jordan</h1>
-    <p class="lede">Pick up where you left off, track your collaborative pathways, and review the courses you've taken.</p>
+    <div class="signin-banner"><span class="dot"></span> You have been successfully signed in as <b>jordan@quottlyinc.com</b></div>
 
-    <!-- Collaborative pathways (the new Collaborative feature) -->
+    <h1 class="h1">Dashboard</h1>
+
+    <div class="dash-grid">
+      <div>
+        <div class="section-h"><h2>Class Schedule</h2></div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Start Date</th><th>Course</th><th>Term</th><th>Status</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr class="empty-row"><td colspan="5">No scheduled classes available</td></tr>
+            </tbody>
+          </table>
+          <div class="tbl-note">To access your online class, log in to your Allan Hancock College <a href="#" onclick="toastNow('Opens Canvas');return false;">Canvas account</a>.</div>
+        </div>
+        <div class="cta-row"><a class="btn btn--primary" href="#" onclick="toastNow('Opens your class schedule');return false;">View your class schedule</a></div>
+      </div>
+
+      <aside class="notif">
+        <h3>Notifications</h3>
+        <p>You don't have any recent notifications.</p>
+        <a href="#" onclick="toastNow('Opens notification preferences');return false;">Edit your preferences</a>
+      </aside>
+    </div>
+
+    <div class="section-h"><h2>Favorite Courses</h2></div>
+    <table class="tbl">
+      <thead><tr><th>Course</th><th>Action</th></tr></thead>
+      <tbody><tr class="empty-row"><td colspan="2">You haven't saved any courses yet. <a href="#" onclick="toastNow('Opens course search');return false;">Why not find some?</a></td></tr></tbody>
+    </table>
+
+    <div class="section-h"><h2>Saved Searches</h2></div>
+    <table class="tbl">
+      <thead><tr><th>Search criteria</th><th>Action</th></tr></thead>
+      <tbody><tr class="empty-row"><td colspan="2">You haven't saved any searches yet.</td></tr></tbody>
+    </table>
+
+    <!-- Regional Collaboratives — the collaborative feature (refined) -->
     <div class="section-h">
-      <h2>My collaborative pathways</h2><span class="count">2 active</span>
+      <h2>Regional Collaboratives</h2><span class="count">2 active pathways</span>
       <a href="collaboratives.html">Explore collaboratives</a>
     </div>
-    <div class="pathways">
-      <article class="pathway">
-        <span class="pathway__collab">Southern CA Health Sciences Network</span>
-        <span class="pathway__title">Registered Nursing (RN)</span>
-        <span class="pathway__note"><b>1 of 3</b> requirements complete · 12 units to go</span>
-        <div class="progress"><div class="progress__bar" style="width:33%"></div></div>
-        <div class="pathway__foot">
-          <span class="muted" style="font-size:12px;">Last activity: 2 days ago</span>
-          <a class="btn btn--primary btn--sm" href="program-detail.html">Continue pathway</a>
+    <div class="collab-cards">
+      <a class="collab-card" href="program-detail.html">
+        <div class="collab-card__body">
+          <div class="collab-card__collab">Southern CA Health Sciences Network</div>
+          <div class="collab-card__prog">Registered Nursing (RN)</div>
+          <div class="collab-card__stats">
+            <div>Requirements<b>1 of 3 complete</b></div>
+            <div>Units<b>12 to go</b></div>
+          </div>
+          <div class="progress"><div class="progress__bar" style="width:33%"></div></div>
         </div>
-      </article>
-      <article class="pathway">
-        <span class="pathway__collab">North Bay Workforce Partnership</span>
-        <span class="pathway__title">Business Transfer Core</span>
-        <span class="pathway__note"><b>0 of 4</b> requirements complete · 24 units to go</span>
-        <div class="progress"><div class="progress__bar" style="width:6%"></div></div>
-        <div class="pathway__foot">
-          <span class="muted" style="font-size:12px;">Just started</span>
-          <a class="btn btn--primary btn--sm" href="program-detail.html">Continue pathway</a>
+        <span class="collab-card__chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="collab-card" href="program-detail.html">
+        <div class="collab-card__body">
+          <div class="collab-card__collab">North Bay Workforce Partnership</div>
+          <div class="collab-card__prog">Business Transfer Core</div>
+          <div class="collab-card__stats">
+            <div>Requirements<b>0 of 4 complete</b></div>
+            <div>Units<b>24 to go</b></div>
+          </div>
+          <div class="progress"><div class="progress__bar" style="width:6%"></div></div>
         </div>
-      </article>
+        <span class="collab-card__chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+      </a>
     </div>
 
-    <!-- Current courses -->
-    <div class="section-h"><h2>Current courses</h2><span class="count">this term · Fall 2026</span></div>
-    <div class="courses">
-      <div class="course">
-        <span class="course__status"><span class="pill pill--progress">In progress</span></span>
-        <div class="course__main">
-          <div class="course__name">ACCT 101 — Financial Accounting</div>
-          <div class="course__sub">Sonoma State University · Instructor: M. Reyes</div>
-          <div class="course__tags">
-            <span class="ctag ctag--program">Registered Nursing (RN)</span>
-            <span class="ctag ctag--collab">Southern CA Health Sciences Network</span>
-          </div>
-        </div>
-        <div class="course__meta"><div><b>4</b>units</div><div><b>—</b>grade</div></div>
-      </div>
-      <div class="course">
-        <span class="course__status"><span class="pill pill--progress">In progress</span></span>
-        <div class="course__main">
-          <div class="course__name">BUS 200 — Organizational Behavior</div>
-          <div class="course__sub">UC San Francisco · Instructor: L. Chen</div>
-          <div class="course__tags">
-            <span class="ctag ctag--program">Business Transfer Core</span>
-            <span class="ctag ctag--collab">North Bay Workforce Partnership</span>
-          </div>
-        </div>
-        <div class="course__meta"><div><b>3</b>units</div><div><b>—</b>grade</div></div>
-      </div>
-    </div>
-
-    <!-- Past courses -->
-    <div class="section-h"><h2>Past courses</h2><span class="count">3 completed</span></div>
-    <div class="courses">
-      <div class="course">
-        <span class="course__status"><span class="enrolled__check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span></span>
-        <div class="course__main">
-          <div class="course__name">MATH 101 — Calculus 1</div>
-          <div class="course__sub">Sonoma State University · Fall 2025</div>
-          <div class="course__tags">
-            <span class="ctag ctag--program">Registered Nursing (RN)</span>
-            <span class="ctag ctag--collab">Southern CA Health Sciences Network</span>
-          </div>
-        </div>
-        <div class="course__meta"><div><b>3</b>units</div><div><b class="grade">A</b>grade</div></div>
-      </div>
-      <div class="course">
-        <span class="course__status"><span class="enrolled__check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span></span>
-        <div class="course__main">
-          <div class="course__name">ENGL 100 — College Composition</div>
-          <div class="course__sub">UCLA · Spring 2025</div>
-          <div class="course__tags">
-            <span class="ctag ctag--program">Registered Nursing (RN)</span>
-            <span class="ctag ctag--collab">Southern CA Health Sciences Network</span>
-          </div>
-        </div>
-        <div class="course__meta"><div><b>4</b>units</div><div><b class="grade">B+</b>grade</div></div>
-      </div>
-      <div class="course">
-        <span class="course__status"><span class="enrolled__check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span></span>
-        <div class="course__main">
-          <div class="course__name">PSYC 110 — Intro to Psychology</div>
-          <div class="course__sub">Home college · Fall 2024</div>
-          <div class="course__tags">
-            <span class="ctag ctag--solo">Independent enrollment · not part of a collaborative</span>
-          </div>
-        </div>
-        <div class="course__meta"><div><b>3</b>units</div><div><b class="grade">A−</b>grade</div></div>
-      </div>
-    </div>
-
-    <!-- Existing dashboard quick links -->
-    <div class="section-h"><h2>Quick links</h2></div>
-    <div class="quick-links">
-      <a class="quick" href="#" onclick="toastNow('Opens Saved Exchange Courses');return false;"><div class="quick__n">7</div><div class="quick__l">Saved courses</div></a>
-      <a class="quick" href="#" onclick="toastNow('Opens Saved Searches');return false;"><div class="quick__n">3</div><div class="quick__l">Saved searches</div></a>
-      <a class="quick" href="#" onclick="toastNow('Opens Class Schedule');return false;"><div class="quick__n">2</div><div class="quick__l">Classes this term</div></a>
-      <a class="quick" href="#" onclick="toastNow('Opens Transcripts');return false;"><div class="quick__n">10</div><div class="quick__l">Units completed</div></a>
-    </div>
+    <!-- Past Courses — each course shows its program + collaborative -->
+    <div class="section-h"><h2>Past Courses</h2><span class="count">4 completed</span></div>
+    <table class="tbl">
+      <thead><tr><th>Course</th><th>Institution</th><th>Term</th><th>Counts toward</th><th>Grade</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>ENGL 101 — College Composition</td><td>De Anza College</td><td>Fall 2023</td>
+          <td><div class="ct-cell"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">Southern CA Health Sciences Network</span></div></td>
+          <td><span class="grade">A</span></td>
+        </tr>
+        <tr>
+          <td>MATH 1A — Calculus 1</td><td>Foothill College</td><td>Spring 2023</td>
+          <td><div class="ct-cell"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">Southern CA Health Sciences Network</span></div></td>
+          <td><span class="grade">B+</span></td>
+        </tr>
+        <tr>
+          <td>BUS 110 — Intro to Computing</td><td>De Anza College</td><td>Fall 2023</td>
+          <td><div class="ct-cell"><span class="ctag ctag--program">Business Transfer Core</span><span class="ctag ctag--collab">North Bay Workforce Partnership</span></div></td>
+          <td><b style="color:var(--amber-700)">F</b></td>
+        </tr>
+        <tr>
+          <td>ECON 1 — Microeconomics</td><td>De Anza College</td><td>Winter 2024</td>
+          <td><span class="ctag ctag--solo">Independent · not part of a collaborative</span></td>
+          <td><span class="grade">B</span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </main>
-<script src="assets/app.js?v=3"></script>
+<script src="assets/app.js?v=4"></script>
 <script>mountStudentChrome('dashboard');</script>
 </body>
 </html>
