@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registered Nursing (RN) · Your path · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=12">
+<link rel="stylesheet" href="assets/styles.css?v=13">
 </head>
 <body>
 <main>
@@ -49,6 +49,8 @@
           <div>You're a <b>Collaborative student</b> on this pathway. Pick up where you left off below.</div>
         </div>
 
+        <!-- Action + requirements appear only after the student joins (LN-35) -->
+        <div class="only-joined">
         <!-- Action-first: the single next step -->
         <div class="hero-next">
           <div class="hero-next__label">UP NEXT</div>
@@ -88,7 +90,7 @@
               <p class="progress-label">0 of 6 units · pick a course you can take</p>
               <ul class="enrolled"></ul>
               <p class="enrolled__empty">No courses added yet.</p>
-              <button class="btn btn--primary btn--sm" disabled onclick="openCourseModal('accounting','Accounting Fundamentals')">View available courses</button>
+              <button class="btn btn--primary btn--sm" onclick="openCourseModal('accounting','Accounting Fundamentals')">View available courses</button>
             </div>
 
             <div class="req-conn req-conn--or"><span>or</span></div>
@@ -102,7 +104,7 @@
               <ul class="enrolled"></ul>
               <p class="enrolled__empty">No courses added yet.</p>
               <div class="req-cta-row">
-                <button class="btn btn--primary btn--sm" disabled onclick="openCourseModal('ge-english','General Education: English')">View available courses</button>
+                <button class="btn btn--primary btn--sm" onclick="openCourseModal('ge-english','General Education: English')">View available courses</button>
                 <button class="btn btn--outline btn--sm" onclick="toastNow('Redirecting to your home college GE course finder')">Find GE courses</button>
               </div>
             </div>
@@ -117,13 +119,14 @@
             <ul class="enrolled"></ul>
             <p class="enrolled__empty">No courses added yet.</p>
             <div class="req-cta-row">
-              <button class="btn btn--primary btn--sm" disabled onclick="openCourseModal('ge-math','General Education: Mathematics')">View available courses</button>
+              <button class="btn btn--primary btn--sm" onclick="openCourseModal('ge-math','General Education: Mathematics')">View available courses</button>
               <button class="btn btn--outline btn--sm" onclick="toastNow('Redirecting to your home college GE course finder')">Find GE courses</button>
             </div>
           </div>
         </div>
+        </div><!-- /.only-joined -->
 
-        <!-- Secondary: about + contact, condensed -->
+        <!-- Secondary: about + contact, condensed (always visible) -->
         <details class="card" style="margin-top:8px;">
           <summary style="font-weight:700; color:var(--c-ink); cursor:pointer;">About this program &amp; contact</summary>
           <p class="about__desc" style="margin-top:12px;">Take qualifying courses across member colleges in the Southern CA Health Sciences Network and apply them toward Registered Nursing prerequisites. <b>Effective</b> Fall 2019 – Current · <a href="#" onclick="toastNow('Downloading Terms &amp; Conditions');return false;">Terms &amp; Conditions</a></p>
@@ -133,7 +136,11 @@
 
       <!-- Progress-first rail -->
       <aside class="dash2__side">
-        <div class="pp">
+        <div class="pp-locked only-unjoined">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20v-6M4 9l8-5 8 5-8 5-8-5z"/></svg>
+          <div>Join the pathway to see your progress and next steps here.</div>
+        </div>
+        <div class="pp only-joined">
           <div class="pp__top"><div class="pp__pct">33%<span>complete</span></div></div>
           <div class="progress"><div class="progress__bar" style="width:33%"></div></div>
           <div class="pp__note"><b>1 of 3</b> requirements done · <b>12 units</b> to go</div>
@@ -147,7 +154,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=12"></script>
+<script src="assets/app.js?v=13"></script>
 <script>mountStudentChrome('collaboratives');</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=12">
+<link rel="stylesheet" href="assets/styles.css?v=13">
 </head>
 <body>
 <main>
@@ -17,7 +17,7 @@
       </span>
     </div>
 
-    <div class="signin-banner"><span class="dot"></span> Signed in as <b>Jordan Rivera</b> · home college <b>Pasadena City College</b> <span class="sid">Student&nbsp;ID <b>PCC&#8209;0042318</b><button class="sid__copy" title="Copy Student ID" onclick="toastNow('Student ID copied');return false;" aria-label="Copy Student ID"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></span></div>
+    <div class="signin-banner"><span class="dot"></span> Home college <b>Pasadena City College</b> · you only see collaboratives and courses you're eligible to take.</div>
 
     <h1 class="h1">Dashboard</h1>
 
@@ -83,11 +83,11 @@
         <table class="tbl">
           <thead><tr><th>Course</th><th>Institution</th><th>Enrollment status</th><th>Class start</th><th>Class end</th><th>Completion</th></tr></thead>
           <tbody>
-            <tr><td>ENGL 101 — College Composition</td><td>De Anza College</td><td><span class="sb sb-reg">Registered</span></td><td>08/21/2023</td><td>12/15/2023</td><td><span class="sb sb-pass">Passed</span></td></tr>
-            <tr><td>MATH 1A — Calculus 1</td><td>Foothill College</td><td><span class="sb sb-reg">Registered</span></td><td>01/08/2024</td><td>05/19/2024</td><td><span class="sb sb-pass">Passed</span></td></tr>
-            <tr><td>CHEM 1A — General Chemistry</td><td>De Anza College</td><td><span class="sb sb-reg">Registered</span></td><td>08/26/2024</td><td>12/13/2024</td><td><span class="sb sb-fail">Failed</span></td></tr>
-            <tr><td>BIOL 1 — General Biology</td><td>Foothill College</td><td><span class="sb sb-wait">Waitlisted</span></td><td>01/06/2025</td><td>05/16/2025</td><td><span class="sb sb-prog">In progress</span></td></tr>
-            <tr><td>ECON 1 — Microeconomics</td><td>De Anza College</td><td><span class="sb sb-drop">Dropped</span></td><td>08/26/2024</td><td>—</td><td><span class="sb sb-na">—</span></td></tr>
+            <tr><td>ENGL 101 — College Composition</td><td>De Anza College</td><td><span class="pill pill--reg">Registered</span></td><td>08/21/2023</td><td>12/15/2023</td><td><span class="pill pill--pass">Passed</span></td></tr>
+            <tr><td>MATH 1A — Calculus 1</td><td>Foothill College</td><td><span class="pill pill--reg">Registered</span></td><td>01/08/2024</td><td>05/19/2024</td><td><span class="pill pill--pass">Passed</span></td></tr>
+            <tr><td>CHEM 1A — General Chemistry</td><td>De Anza College</td><td><span class="pill pill--reg">Registered</span></td><td>08/26/2024</td><td>12/13/2024</td><td><span class="pill pill--fail">Failed</span></td></tr>
+            <tr><td>BIOL 1 — General Biology</td><td>Foothill College</td><td><span class="pill pill--wait">Waitlisted</span></td><td>01/06/2025</td><td>05/16/2025</td><td><span class="pill pill--progress">In progress</span></td></tr>
+            <tr><td>ECON 1 — Microeconomics</td><td>De Anza College</td><td><span class="pill pill--drop">Dropped</span></td><td>08/26/2024</td><td>—</td><td><span class="pill pill--na">—</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -104,7 +104,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=12"></script>
+<script src="assets/app.js?v=13"></script>
 <script>mountStudentChrome('dashboard');</script>
 </body>
 </html>

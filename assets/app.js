@@ -38,7 +38,10 @@ function mountStudentChrome(active) {
       <nav class="s-header__actions">
         <a class="s-act" href="#">${icoFaq} FAQs</a>
         <span class="s-act__div"></span>
-        <a class="s-act" href="#">${icoUser} Profile</a>
+        <button class="s-id" title="Jordan Rivera · Student ID PCC-0042318 — click to copy" onclick="flashToast('Student ID copied'); showPendingToast(); return false;">
+          <span class="s-id__av">JR</span>
+          <span class="s-id__txt"><b>Jordan Rivera</b><span>ID&nbsp;PCC&#8209;0042318</span></span>
+        </button>
         <a class="s-act" href="#">${icoOut} Log out</a>
       </nav>
     </div>

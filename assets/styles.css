@@ -641,15 +641,14 @@ img { max-width: 100%; display: block; }
 .sid__copy svg { width:13px; height:13px; }
 .sid__copy:hover { background:var(--blue-50); }
 
-/* enrollment / completion status badges (Past Courses, LN-43) */
-.sb { display:inline-flex; align-items:center; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; }
-.sb-reg  { background:var(--blue-50); color:var(--c-primary); }
-.sb-wait { background:#FFF7E6; color:var(--amber-700); }
-.sb-drop { background:var(--gray-200); color:var(--gray-700); }
-.sb-pass { background:var(--green-bg); color:var(--green-700); }
-.sb-fail { background:#FDECEC; color:#B91C1C; }
-.sb-prog { background:var(--blue-50); color:var(--c-primary); }
-.sb-na   { background:var(--gray-100); color:var(--gray-500); }
+/* enrollment / completion status — uses the shared .pill component (Past Courses, LN-43).
+   .pill--progress already defined above for "In progress". */
+.pill--reg  { background: var(--blue-50);  color: var(--c-primary); }
+.pill--wait { background: #FFF7E6;          color: var(--amber-700); }
+.pill--drop { background: var(--gray-200);  color: var(--gray-700); }
+.pill--pass { background: var(--green-bg);  color: var(--green-700); }
+.pill--fail { background: #FDECEC;          color: #B91C1C; }
+.pill--na   { background: var(--gray-100);  color: var(--gray-500); }
 
 /* utility */
 .hide { display: none !important; }
@@ -702,12 +701,32 @@ body.joined .joined-status { display: flex; }
 }
 .joined-status .js-dot svg { width: 13px; height: 13px; }
 
-.req-locked-note {
-  background: #FFF7E6; border: 1px solid #FCE2B0; color: var(--amber-700);
-  border-radius: 10px; padding: 10px 14px; font-size: 13px; margin: 0 0 16px;
+/* Requirements stay hidden until the student joins the pathway (LN-35) */
+.only-joined { display: none; }
+body.joined .only-joined { display: block; }
+body.joined .only-unjoined { display: none; }
+
+/* placeholder shown in the progress rail before the student joins (V2) */
+.pp-locked {
+  background: #fff; border: 1px dashed var(--gray-300); border-radius: 16px;
+  padding: 22px 20px; text-align: center; color: var(--gray-600); font-size: 13px; line-height: 20px;
 }
-body.joined .req-locked-note { display: none; }
-.req-card .btn[disabled] { opacity: .5; cursor: not-allowed; }
+.pp-locked svg { width: 26px; height: 26px; color: var(--gray-400); margin-bottom: 8px; }
 
 /* secondary CTA row inside a requirement (e.g. Find GE courses, LN-27) */
 .req-cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Identity chip in the shared header — shows name + Student ID on every page (LN-47) */
+.s-id {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: transparent; border: 0; cursor: pointer; padding: 2px 4px; border-radius: 10px;
+}
+.s-id:hover { background: var(--blue-50); }
+.s-id__av {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--c-primary); color: #fff; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.s-id__txt { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
+.s-id__txt b { font-size: 13px; color: #222; }
+.s-id__txt span { font-size: 11px; color: var(--gray-600); }
