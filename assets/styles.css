@@ -768,3 +768,57 @@ body.joined .only-joined-i { display: inline-flex; }
 .glance__k { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--gray-600); }
 .glance__v { font-size: 15px; font-weight: 700; color: var(--c-ink); }
 @media (max-width: 760px) { .glance { grid-template-columns: repeat(2, 1fr); } }
+
+/* ============================================================
+   Requirement course search — "Courses for '<requirement>'" (Figma 449:7332)
+   ============================================================ */
+.rc-sub { color: var(--gray-700); font-size: 14px; margin: 0 0 24px; }
+.rc-grid { display: grid; grid-template-columns: 308px 1fr; gap: 24px; align-items: start; }
+@media (max-width: 880px) { .rc-grid { grid-template-columns: 1fr; } }
+
+.rc-filters { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; padding: 22px; }
+.rc-filters h2 { font-size: 18px; color: var(--c-ink); margin: 0; }
+.rc-fgroup { padding: 16px 0; border-top: 1px solid var(--gray-200); }
+.rc-fgroup:first-of-type { border-top: 0; padding-top: 14px; }
+.rc-fgroup h3 { font-size: 14px; color: var(--c-primary); margin: 0 0 12px; font-weight: 700; }
+.rc-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--c-text); margin: 8px 0; cursor: pointer; line-height: 1.45; }
+.rc-check input { margin: 1px 0 0; accent-color: var(--c-gold); flex: 0 0 auto; }
+.rc-checks-row { display: flex; gap: 28px; flex-wrap: wrap; }
+.rc-label { font-size: 12px; color: var(--gray-600); margin: 10px 0 4px; }
+.rc-field { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-300); border-radius: 8px; font: inherit; font-size: 13px; background: #fff; }
+.rc-dates { display: flex; gap: 8px; align-items: flex-end; }
+.rc-dates > div { flex: 1 1 0; }
+.rc-go { background: var(--c-primary); color: #fff; border: 0; border-radius: 8px; width: 38px; height: 38px; flex: 0 0 auto; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.rc-go svg { width: 16px; height: 16px; }
+
+.rc-results__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--c-primary); padding-bottom: 10px; margin-bottom: 14px; }
+.rc-results__head h2 { font-size: 18px; color: var(--c-ink); margin: 0; }
+.rc-found { color: var(--gray-700); font-size: 14px; margin: 0 0 16px; }
+.rc-save { display: inline-flex; align-items: center; gap: 6px; color: var(--c-primary); font-weight: 600; font-size: 13px; white-space: nowrap; }
+.rc-save svg { width: 15px; height: 15px; }
+
+.course-result { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; margin-bottom: 16px; background: #fff; }
+.course-result__head { display: flex; align-items: center; gap: 14px; background: var(--gray-100); padding: 14px 18px; }
+.course-result__id { flex: 1 1 auto; }
+.course-result__inst { font-size: 12px; color: var(--gray-600); margin-bottom: 2px; }
+.course-result__title { color: var(--c-primary); font-weight: 700; font-size: 16px; }
+.course-result__open { font-size: 13px; font-weight: 700; color: #333; }
+.course-result__badges { display: flex; gap: 20px; padding: 12px 18px; font-size: 12px; color: var(--gray-700); }
+.course-result__badge { display: inline-flex; align-items: center; gap: 6px; }
+.course-result__badge svg { width: 15px; height: 15px; color: var(--c-gold); }
+.course-result__facts { display: flex; gap: 40px; padding: 4px 18px 16px; }
+.crf__k { font-size: 11px; color: var(--gray-600); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 5px; }
+.crf__v { color: var(--c-ink); font-weight: 600; font-size: 13px; }
+.crt { display: flex; gap: 16px; }
+.crt span { display: inline-flex; align-items: center; gap: 5px; color: var(--c-ink); font-weight: 600; font-size: 13px; }
+.crt svg { width: 14px; height: 14px; color: var(--green-600); }
+.course-result__foot { display: flex; align-items: center; justify-content: space-between; background: var(--gray-100); padding: 12px 18px; border-top: 1px solid var(--gray-200); }
+.course-result__tk { color: var(--c-primary); font-weight: 600; font-size: 13px; }
+.course-result__price { font-weight: 700; color: var(--c-ink); display: inline-flex; align-items: center; gap: 6px; }
+.course-result__price svg { width: 14px; height: 14px; color: var(--gray-500); }
+
+/* requirement rows are clickable → open the requirement's course search (Figma 449:9341 → 449:7332) */
+.req-card--link { cursor: pointer; position: relative; padding-right: 56px; transition: border-color .12s, box-shadow .12s; }
+.req-card--link:hover { border-color: var(--c-primary); box-shadow: 0 4px 14px rgba(25,83,168,.10); }
+.req-card__chev { position: absolute; top: 22px; right: 18px; color: var(--gray-400); display: inline-flex; }
+.req-card__chev svg { width: 24px; height: 24px; }
