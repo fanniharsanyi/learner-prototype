@@ -602,3 +602,30 @@ img { max-width: 100%; display: block; }
 .qlinks li:last-child a { border-bottom: 0; }
 .qlinks .n { color: var(--gray-500); font-weight: 700; }
 .apps-empty { font-size: 13px; color: var(--gray-700); margin: 0; line-height: 1.5; }
+
+/* ============================================================
+   Program details — vertical How-it-works steps (per design 449:9341)
+   ============================================================ */
+.howsteps { display:flex; flex-direction:column; gap:16px; margin-top:4px; }
+.howstep { display:flex; gap:12px; align-items:flex-start; }
+.howstep__n { flex:none; width:24px; height:24px; border-radius:50%; background:var(--c-primary); color:#fff; font-size:12px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+.howstep__t { font-weight:700; font-size:13px; color:var(--c-ink); line-height:1.4; }
+.howstep__d { font-size:12px; color:var(--gray-700); margin-top:2px; line-height:1.5; }
+
+/* Program details V2 — progress-first header + at-a-glance requirement checklist */
+.pp { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-card); padding:20px 22px; margin-bottom:22px; }
+.pp__top { display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.pp__pct { font-size:24px; font-weight:800; color:var(--c-ink); }
+.pp__pct span { font-size:14px; font-weight:600; color:var(--gray-600); margin-left:8px; }
+.pp .progress { height:10px; margin-bottom:8px; }
+.pp__note { font-size:13px; color:var(--gray-700); }
+.checklist { list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:2px; }
+.checklist a { display:flex; align-items:center; gap:10px; padding:9px 6px; border-radius:6px; font-size:14px; color:var(--c-text); }
+.checklist a:hover { background:var(--gray-100); text-decoration:none; }
+.checklist .ck { flex:none; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; border:2px solid var(--gray-400); }
+.checklist .ck svg { width:12px; height:12px; }
+.checklist .done .ck { background:var(--green-600); border-color:var(--green-600); color:#fff; }
+.checklist .now .ck { border-color:var(--c-primary); color:var(--c-primary); }
+.checklist .nm { flex:1; }
+.checklist .st { font-size:12px; color:var(--gray-600); }
+.checklist .done .nm { color:var(--gray-600); }
