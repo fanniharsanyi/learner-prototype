@@ -836,3 +836,6 @@ body.joined .only-joined-i { display: inline-flex; }
 .req-card--link:hover { border-color: var(--c-primary); box-shadow: 0 4px 14px rgba(25,83,168,.10); }
 .req-card__chev { position: absolute; top: 22px; right: 18px; color: var(--gray-400); display: inline-flex; }
 .req-card__chev svg { width: 24px; height: 24px; }
+
+/* requirement rows show a small "N required to fulfill" line instead of a progress bar (Figma 449:9341) */
+.req-card__fulfill { font-size: 13px; color: var(--gray-500); margin: 12px 0 0; }
