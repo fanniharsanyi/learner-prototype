@@ -517,7 +517,7 @@ img { max-width: 100%; display: block; }
 
 /* generic learner table (Class Schedule / Favorite / Saved / Past Courses) */
 .tbl { width:100%; border-collapse:collapse; font-size:14px; background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-card); overflow:hidden; }
-.tbl thead th { text-align:left; background:var(--gray-100); border-bottom:2px solid var(--c-gold); padding:11px 16px; font-size:12px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--gray-600); }
+.tbl thead th { text-align:left; background:var(--gray-100); border-bottom:2px solid var(--c-gold); padding:11px 16px; font-size:13px; font-weight:700; color:var(--gray-700); }
 .tbl tbody td { padding:13px 16px; border-bottom:1px solid var(--gray-200); vertical-align:middle; color:var(--c-text); }
 .tbl tbody tr:last-child td { border-bottom:0; }
 .tbl tbody tr:hover td { background:var(--gray-100); }
