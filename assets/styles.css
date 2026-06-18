@@ -274,11 +274,13 @@ img { max-width: 100%; display: block; }
 
 .contact__lead { font-weight: 600; color: var(--c-ink); margin: 0 0 6px; }
 .contact__sub { color: var(--gray-700); font-size: 13px; margin: 0 0 14px; }
-.contact__rows { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-.contact__row { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.contact__rows { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.contact__row { display: flex; align-items: center; gap: 10px; font-size: 13px; border: 1px solid var(--gray-300); border-radius: 8px; padding: 11px 14px; }
 .contact__row svg { width: 16px; height: 16px; color: var(--c-primary); flex: 0 0 auto; }
-.contact__row b { color: var(--c-ink); min-width: 150px; }
-.contact__row a { margin-left: auto; }
+.contact__row b { color: var(--c-ink); white-space: nowrap; }
+.contact__row a { margin-left: auto; color: var(--c-primary); word-break: break-all; text-align: right; }
+.contact__row .ext { flex: 0 0 auto; color: var(--c-primary); display: inline-flex; margin-left: 8px; }
+.contact__row .ext svg { width: 14px; height: 14px; }
 
 /* ---- Requirements ---- */
 .req-head { margin: 8px 0 18px; }
