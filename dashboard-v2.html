@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard (V2) · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=7">
+<link rel="stylesheet" href="assets/styles.css?v=8">
 </head>
 <body>
 <main>
   <div class="page">
     <div class="vswitch">
-      <b>Learner dashboard</b> — Version 2: rethought to be scannable and action-first. Lower priority, exploratory.
+      <b>Learner dashboard</b> — Version 2 (concept): rethought to be student-first — leads with the next action and your progress. Exploratory.
       <span class="vswitch__links">
         <a href="dashboard.html">V1 · Extended</a>
         <a href="dashboard-v2.html" aria-current="page">V2 · Rethought</a>
@@ -18,76 +18,94 @@
     </div>
 
     <h1 class="h1">Welcome back, Jordan</h1>
+    <p class="statusline">You're on <b>2 collaborative pathways</b> · <b>1 of 7</b> requirements done · <b>10 units</b> earned.</p>
+
+    <div class="lv-banner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>
+      <div>Home college <b>Pasadena City College</b>. You only see collaboratives and courses you're eligible to take.</div>
+    </div>
+
+    <!-- Action-first: the single most useful next step -->
+    <div class="hero-next">
+      <div class="hero-next__label">UP NEXT</div>
+      <div class="hero-next__title">Add a course to <b>Accounting Fundamentals</b></div>
+      <div class="hero-next__sub">Registered Nursing (RN) · Southern CA Health Sciences Network — one course left to finish this requirement.</div>
+      <div class="hero-next__actions">
+        <a class="btn btn--primary" href="program-detail-ideal.html">Find eligible courses</a>
+        <a class="hero-next__more" href="program-detail-ideal.html">See all 3 next steps →</a>
+      </div>
+    </div>
 
     <div class="dash2">
       <div class="dash2__main">
-        <div class="section-h" style="margin-top:8px;"><h2>Your pathways</h2><a href="collaboratives.html">Explore collaboratives</a></div>
+        <div class="section-h" style="margin-top:0;"><h2>Your pathways</h2><a href="collaboratives.html">Explore collaboratives</a></div>
         <div class="courses">
           <article class="pathway" style="border-left:4px solid var(--c-primary);">
             <span class="pathway__collab">Southern CA Health Sciences Network</span>
             <span class="pathway__title">Registered Nursing (RN)</span>
             <div class="progress"><div class="progress__bar" style="width:33%"></div></div>
-            <span class="pathway__note"><b>1 of 3</b> requirements · 12 units to go</span>
+            <span class="pathway__note"><b>1 of 3</b> requirements done · 12 units to go</span>
             <div class="pathway__foot">
-              <span class="muted" style="font-size:12px;">Next: add a course to <b>Accounting Fundamentals</b></span>
-              <a class="btn btn--primary btn--sm" href="program-detail.html">Continue</a>
+              <span class="muted" style="font-size:12px;">Next: a course for <b>Accounting Fundamentals</b></span>
+              <a class="btn btn--primary btn--sm" href="program-detail-ideal.html">Continue</a>
             </div>
           </article>
           <article class="pathway" style="border-left:4px solid var(--gray-400);">
             <span class="pathway__collab">North Bay Workforce Partnership</span>
             <span class="pathway__title">Business Transfer Core</span>
             <div class="progress"><div class="progress__bar" style="width:6%"></div></div>
-            <span class="pathway__note"><b>0 of 4</b> requirements · 24 units to go</span>
+            <span class="pathway__note"><b>0 of 4</b> requirements done · 24 units to go</span>
             <div class="pathway__foot">
               <span class="muted" style="font-size:12px;">Next: pick your first requirement</span>
-              <a class="btn btn--primary btn--sm" href="program-detail.html">Continue</a>
+              <a class="btn btn--primary btn--sm" href="program-detail-ideal.html">Continue</a>
             </div>
           </article>
         </div>
 
+        <div class="section-h"><h2>Your courses</h2></div>
         <div class="tabbar" role="tablist">
-          <button role="tab" data-tab="current" aria-selected="true">Current courses</button>
-          <button role="tab" data-tab="past" aria-selected="false">Past courses</button>
+          <button role="tab" data-tab="current" aria-selected="true">In progress</button>
+          <button role="tab" data-tab="past" aria-selected="false">Completed</button>
         </div>
 
         <div class="courses" data-pane="current">
           <div class="course">
             <div class="course__main">
               <div class="course__name">ACCT 101 — Financial Accounting</div>
-              <div class="course__tags"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">SoCal Health Sciences</span></div>
+              <div class="course__tags"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">Southern CA Health Sciences Network</span></div>
             </div>
-            <div class="course__meta"><div><b>4</b>units</div><div><b>In&nbsp;progress</b>status</div></div>
+            <div class="course__meta"><div><b>4</b>units</div><div><b class="pill pill--progress" style="padding:3px 9px;">In&nbsp;progress</b></div></div>
           </div>
           <div class="course">
             <div class="course__main">
               <div class="course__name">BUS 200 — Organizational Behavior</div>
-              <div class="course__tags"><span class="ctag ctag--program">Business Transfer Core</span><span class="ctag ctag--collab">North Bay Workforce</span></div>
+              <div class="course__tags"><span class="ctag ctag--program">Business Transfer Core</span><span class="ctag ctag--collab">North Bay Workforce Partnership</span></div>
             </div>
-            <div class="course__meta"><div><b>3</b>units</div><div><b>In&nbsp;progress</b>status</div></div>
+            <div class="course__meta"><div><b>3</b>units</div><div><b class="pill pill--progress" style="padding:3px 9px;">In&nbsp;progress</b></div></div>
           </div>
         </div>
 
         <div class="courses" data-pane="past" style="display:none;">
           <div class="course">
             <div class="course__main">
-              <div class="course__name">MATH 101 — Calculus 1</div>
-              <div class="course__tags"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">SoCal Health Sciences</span></div>
+              <div class="course__name">ENGL 101 — College Composition</div>
+              <div class="course__tags"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">Southern CA Health Sciences Network</span></div>
             </div>
-            <div class="course__meta"><div><b>3</b>units</div><div><b class="grade">A</b>Fall 2025</div></div>
+            <div class="course__meta"><div><b>3</b>units</div><div><b class="grade">A</b>Fall 2023</div></div>
           </div>
           <div class="course">
             <div class="course__main">
-              <div class="course__name">ENGL 100 — College Composition</div>
-              <div class="course__tags"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">SoCal Health Sciences</span></div>
+              <div class="course__name">MATH 1A — Calculus 1</div>
+              <div class="course__tags"><span class="ctag ctag--program">Registered Nursing (RN)</span><span class="ctag ctag--collab">Southern CA Health Sciences Network</span></div>
             </div>
-            <div class="course__meta"><div><b>4</b>units</div><div><b class="grade">B+</b>Spring 2025</div></div>
+            <div class="course__meta"><div><b>4</b>units</div><div><b class="grade">B+</b>Spring 2023</div></div>
           </div>
           <div class="course">
             <div class="course__main">
-              <div class="course__name">PSYC 110 — Intro to Psychology</div>
-              <div class="course__tags"><span class="ctag ctag--solo">Independent enrollment</span></div>
+              <div class="course__name">ECON 1 — Microeconomics</div>
+              <div class="course__tags"><span class="ctag ctag--solo">Independent · not part of a collaborative</span></div>
             </div>
-            <div class="course__meta"><div><b>3</b>units</div><div><b class="grade">A−</b>Fall 2024</div></div>
+            <div class="course__meta"><div><b>3</b>units</div><div><b class="grade">B</b>Winter 2024</div></div>
           </div>
         </div>
       </div>
@@ -100,19 +118,25 @@
             <div class="snapshot__stat"><b>10</b><div>units completed</div><b style="display:block;margin-top:8px;">1 / 7</b><div>requirements done</div></div>
           </div>
         </div>
-        <div class="nextup">
-          <h3>Up next</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg><span><a href="program-detail.html">Add a course</a> to Accounting Fundamentals — RN</span></li>
-            <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg><span>Start <a href="program-detail.html">GE Mathematics</a> (home institution only)</span></li>
-            <li><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg><span>Pick your first requirement in <a href="program-detail.html">Business Transfer Core</a></span></li>
+
+        <div class="notif" style="margin-top:16px;">
+          <h3>Applications</h3>
+          <p class="apps-empty">No active applications yet. When you enroll in a course, you'll track its approval status here — from request to confirmed.</p>
+        </div>
+
+        <div class="notif" style="margin-top:16px;">
+          <h3>Quick links</h3>
+          <ul class="qlinks">
+            <li><a href="#" onclick="toastNow('Opens favorite courses');return false;">Favorite courses <span class="n">0</span></a></li>
+            <li><a href="#" onclick="toastNow('Opens saved searches');return false;">Saved searches <span class="n">0</span></a></li>
+            <li><a href="#" onclick="toastNow('Opens the CVC course search');return false;">Search for classes <span class="n">›</span></a></li>
           </ul>
         </div>
       </aside>
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=7"></script>
+<script src="assets/app.js?v=8"></script>
 <script>mountStudentChrome('dashboard');</script>
 </body>
 </html>
