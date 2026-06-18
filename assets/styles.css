@@ -129,11 +129,16 @@ img { max-width: 100%; display: block; }
 }
 .s-footer__seal { width: 64px; height: 64px; flex: 0 0 auto; }
 .s-footer__col { display: flex; flex-direction: column; gap: 6px; padding-left: 40px; border-left: 1px solid rgba(255,255,255,.25); }
-.s-footer a { color: #fff; font-size: 13px; }
-.s-footer__muted { color: rgba(255,255,255,.8); font-size: 13px; }
+.s-footer a { color: #fff; font-size: 13px; text-decoration: underline; }
+.s-footer a:hover { text-decoration: underline; opacity: .85; }
+.s-footer__muted { color: rgba(255,255,255,.8); font-size: 13px; text-decoration: none; }
 .s-footer__brands { margin-left: auto; display: flex; flex-direction: column; gap: 14px; padding-left: 40px; border-left: 1px solid rgba(255,255,255,.25); }
-.s-footer__logo { font-weight: 800; letter-spacing: .03em; font-size: 18px; }
-.s-footer__copy { background: var(--c-primary-active); color: rgba(255,255,255,.85); text-align: center; font-size: 12px; padding: 12px; }
+.s-footer__logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .04em; font-size: 22px; color: #fff; }
+.s-footer__logo svg { width: 30px; height: 30px; flex: 0 0 auto; }
+.s-footer__n2n { display: inline-flex; align-items: center; gap: 10px; color: #fff; }
+.s-footer__n2n svg { width: 34px; height: 26px; flex: 0 0 auto; }
+.s-footer__n2n b { font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+.s-footer__copy { color: rgba(255,255,255,.9); text-align: center; font-size: 12px; letter-spacing: .02em; padding: 8px 12px 30px; }
 
 /* ============================================================
    Page scaffold + shared bits
