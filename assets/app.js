@@ -28,11 +28,7 @@ function mountStudentChrome(active) {
   <header class="s-header">
     <div class="s-header__in">
       <a class="s-brand" href="collaboratives.html">
-        ${seal(38)}
-        <span class="s-brand__txt">
-          <span class="s-brand__cc">California<br>Community<br>Colleges</span>
-          <span class="s-brand__vc">California<br>Virtual Campus</span>
-        </span>
+        <img class="s-brand__logo" src="assets/ccc-logo.png" alt="California Community Colleges · California Virtual Campus">
       </a>
       <span class="s-header__home">HOME</span>
       <nav class="s-header__actions">
@@ -61,7 +57,7 @@ function mountStudentChrome(active) {
   const footer = `
   <footer class="s-footer">
     <div class="s-footer__in">
-      ${seal(64).replace('s-brand__seal', 's-footer__seal')}
+      <img class="s-footer__seal" src="assets/ccc-seal.png" alt="California Community Colleges">
       <div class="s-footer__col">
         <a href="#">FAQ</a>
         <a href="#">Contact</a>
@@ -72,14 +68,7 @@ function mountStudentChrome(active) {
         <span class="s-footer__muted">Quottly Inc.</span>
       </div>
       <div class="s-footer__brands">
-        <span class="s-footer__logo">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v3.83C5 18.66 8.13 20 12 20s7-1.34 7-2.99v-3.83l-7 3.82-7-3.82z"/></svg>
-          QUOTTLY
-        </span>
-        <span class="s-footer__n2n">
-          <svg viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M11 23h19a7 7 0 0 0 .9-13.95A9 9 0 0 0 13.8 6.4 6.5 6.5 0 0 0 11 23z"/></svg>
-          <b>N2N&nbsp;SERVICES</b>
-        </span>
+        <img class="s-footer__brandimg" src="assets/quottly-n2n.png" alt="Quottly · N2N Services">
       </div>
     </div>
     <div class="s-footer__copy">© 2026 QUOTTLY, INC. ALL RIGHTS RESERVED.</div>
