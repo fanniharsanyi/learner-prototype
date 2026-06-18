@@ -97,6 +97,14 @@ function showPendingToast() {
 function toastNow(msg) { flashToast(msg); showPendingToast(); }
 function go(url) { window.location.href = url; }
 
+/* LN-35 — student opts into a pathway and becomes a Collaborative student.
+   Course selection stays locked until they join. */
+function joinPathway() {
+  document.body.classList.add('joined');
+  document.querySelectorAll('.req-card .btn[disabled]').forEach(function (b) { b.disabled = false; });
+  toastNow("You're now a Collaborative student — you can add courses");
+}
+
 /* ---- Available-courses catalog, keyed by requirement id ---- */
 const CATALOG = {
   'accounting': [
