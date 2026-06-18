@@ -106,11 +106,9 @@
   .branch__note { font-size:13px; color:var(--amber-700); font-weight:500; margin-bottom:16px; }
   .branch__note b { font-weight:700; }
   .opts { position:relative; }
-  .opt { position:relative; padding-left:30px; }
-  .opts::before { content:""; position:absolute; left:9px; top:24px; bottom:24px; width:2px; background:var(--amber-border); border-radius:2px; }
-  .opt::before { content:""; position:absolute; left:9px; top:34px; width:21px; height:2px; background:var(--amber-border); }
-  .opt__num { position:absolute; left:0; top:26px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 0 0 2px var(--amber-border); font-size:10.5px; font-weight:700; color:var(--amber-700); display:grid; place-items:center; z-index:2; }
-  .or-div { display:flex; align-items:center; gap:12px; padding:8px 0 8px 30px; }
+  .opt { position:relative; }
+  .opt__num { display:none; }
+  .or-div { display:flex; align-items:center; gap:12px; padding:10px 0; }
   .or-div__or { font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--amber-700); background:#fff; border:1px solid var(--amber-border); border-radius:99px; padding:3px 12px; }
   .or-div__ln { flex:1; height:1px; background:var(--amber-border); opacity:.7; }
   .branch .pw-card { background:#fff; }
