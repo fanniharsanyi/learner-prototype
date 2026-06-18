@@ -738,3 +738,18 @@ body.joined .only-joined-i { display: inline-flex; }
 .s-id__txt { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
 .s-id__txt b { font-size: 13px; color: #222; }
 .s-id__txt span { font-size: 11px; color: var(--gray-600); }
+
+/* one-line scale summary inside the Get started gate */
+.getstarted__meta { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.22); font-size: 13px; color: #dce8fb; }
+.getstarted__meta b { color: #fff; }
+
+/* "Pathway at a glance" — decision stats shown before enrollment */
+.glance {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--gray-200); border: 1px solid var(--gray-200);
+  border-radius: 12px; overflow: hidden; margin: 0 0 20px;
+}
+.glance__item { background: #fff; padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; }
+.glance__k { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--gray-600); }
+.glance__v { font-size: 15px; font-weight: 700; color: var(--c-ink); }
+@media (max-width: 760px) { .glance { grid-template-columns: repeat(2, 1fr); } }
