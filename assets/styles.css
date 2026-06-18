@@ -295,6 +295,9 @@ img { max-width: 100%; display: block; }
 .req-progress-note b { color: var(--c-primary); }
 
 .req-list { display: flex; flex-direction: column; gap: 0; }
+/* V2 drops the AND/OR connectors between top-level requirements, so give the
+   cards breathing room instead of letting them sit flush against each other. */
+.dash2 .req-list { gap: 16px; }
 .req-card {
   background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-card);
   padding: 22px;
