@@ -159,18 +159,18 @@ img { max-width: 100%; display: block; }
 .btn--ghost:hover { background: var(--gray-100); text-decoration: none; }
 .btn--sm { padding: 6px 18px; font-size: 13px; border-radius: 14px; }
 
+/* .tag is the same Pill v2 component as .pill — kept consistent across the UI */
 .tag {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; line-height: 1;
-  padding: 5px 9px; border-radius: 999px;
-  border: 1px solid var(--gray-300); color: var(--gray-700); background: #fff;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; line-height: 1; min-height: 24px;
+  padding: 0 10px; white-space: nowrap;
+  border: 1px solid #8d959f; color: #273540; background: #fff; border-radius: 8px;
 }
 .tag svg { width: 12px; height: 12px; }
-/* "Your home institution invited" = info pill (Pill v2, color=info) */
-.tag--invited { border-color: #2b7abc; color: #2871af; background: #fff; border-radius: 8px; font-weight: 600; padding: 4px 10px; }
-.tag--required { border-color: #E3B7B5; color: #B91C1C; }
-.tag--choose { border-color: #C9B36B; color: var(--amber-700); }
-.tag--home { border-color: #E3B7B5; color: #B91C1C; }
+.tag--invited  { color: #1953a8; border-color: #1953a8; } /* info */
+.tag--required { color: #cf1f24; border-color: #e62429; } /* error */
+.tag--choose   { color: #1953a8; border-color: #1953a8; } /* info */
+.tag--home     { color: #bb4200; border-color: #cf4a00; } /* warning */
 /* Pill v2 (Figma node 947:14397): white bg, 1px colored border, 8px radius,
    600 weight, 24px tall, colored text matching the border. */
 .pill {
@@ -431,10 +431,11 @@ img { max-width: 100%; display: block; }
 .course__name { font-weight: 700; font-size: 14px; color: var(--c-ink); }
 .course__sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
 .course__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
-.ctag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
-.ctag--program { background: #fff; border: 1px solid var(--c-primary); color: var(--c-primary); }
-.ctag--collab { background: #fff; border: 1px solid var(--green-600); color: var(--green-700); }
-.ctag--solo { background: var(--gray-200); color: var(--gray-700); }
+/* .ctag is the same Pill v2 component — consistent across the UI */
+.ctag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; line-height: 1; min-height: 24px; padding: 0 10px; white-space: nowrap; background: #fff; border: 1px solid currentColor; border-radius: 8px; }
+.ctag--program { color: #1953a8; border-color: #1953a8; } /* info */
+.ctag--collab { color: #037d37; border-color: #03893d; } /* success */
+.ctag--solo { color: #273540; border-color: #8d959f; } /* base */
 .path-card__cta { margin-top: 14px; }
 .course__meta { flex: 0 0 auto; display: flex; gap: 20px; text-align: right; }
 .course__meta div { font-size: 12px; color: var(--gray-600); }
@@ -663,11 +664,11 @@ img { max-width: 100%; display: block; }
 /* enrollment / completion status — outlined Pill v2 variants (Past Courses, LN-43).
    .pill--progress (info, blue) already defined above for "In progress". */
 .pill--reg  { color: #1953a8; border-color: #1953a8; } /* info */
-.pill--wait { color: #B45309; border-color: #D9A441; } /* warning */
-.pill--drop { color: #616161; border-color: #BDBDBD; } /* neutral */
+.pill--wait { color: #bb4200; border-color: #cf4a00; } /* warning */
+.pill--drop { color: #273540; border-color: #8d959f; } /* base */
 .pill--pass { color: #037d37; border-color: #03893d; } /* success */
-.pill--fail { color: #B91C1C; border-color: #DC8C8A; } /* error */
-.pill--na   { color: #9E9E9E; border-color: #E0E0E0; } /* muted */
+.pill--fail { color: #cf1f24; border-color: #e62429; } /* error */
+.pill--na   { color: #757575; border-color: #bdbdbd; } /* muted */
 
 /* utility */
 .hide { display: none !important; }

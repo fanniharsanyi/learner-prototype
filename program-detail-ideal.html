@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registered Nursing (RN) · Your path · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=29">
+<link rel="stylesheet" href="assets/styles.css?v=30">
 <style>
   /* ============================================================
      Program detail V2 (concept) — "pathway spine".
@@ -74,12 +74,13 @@
   .pw-card__top { display:flex; align-items:flex-start; gap:14px; }
   .pw-card__main { flex:1; min-width:0; }
   .pw-flags { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:9px; }
-  .pw-flag { font-size:11px; font-weight:600; letter-spacing:.02em; padding:3px 9px; border-radius:99px; display:inline-flex; align-items:center; gap:5px; }
-  .pw-flag svg { width:11px; height:11px; }
-  .pw-flag--req { background:#FDEEEE; color:#B4232A; }
-  .pw-flag--choose { background:var(--blue-50); color:var(--c-primary); }
-  .pw-flag--home { background:var(--amber-bg); color:var(--amber-700); }
-  .pw-flag--done { background:var(--green-bg); color:var(--green-700); }
+  /* Pill v2 — same outlined style as the rest of the UI */
+  .pw-flag { font-size:12px; font-weight:600; min-height:24px; padding:0 10px; border-radius:8px; background:#fff; border:1px solid currentColor; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+  .pw-flag svg { width:12px; height:12px; }
+  .pw-flag--req { color:#cf1f24; border-color:#e62429; }
+  .pw-flag--choose { color:#1953a8; border-color:#1953a8; }
+  .pw-flag--home { color:#bb4200; border-color:#cf4a00; }
+  .pw-flag--done { color:#037d37; border-color:#03893d; }
   .pw-card__title { font-size:17px; font-weight:700; color:var(--c-ink); }
   .pw-card__desc { font-size:13.5px; color:var(--gray-700); margin-top:5px; line-height:1.55; }
   .pw-card__foot { display:flex; align-items:center; gap:14px; margin-top:14px; flex-wrap:wrap; }
@@ -102,7 +103,6 @@
   /* choose-one branch */
   .branch { position:relative; background:var(--amber-bg); border:1px solid var(--amber-border); border-radius:14px; padding:18px 18px 20px; }
   .branch__head { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
-  .branch__head .pw-flag--choose { background:#fff; box-shadow:inset 0 0 0 1px var(--amber-border); color:var(--amber-700); }
   .branch__note { font-size:13px; color:var(--amber-700); font-weight:500; margin-bottom:16px; }
   .branch__note b { font-weight:700; }
   .opts { position:relative; }
@@ -334,7 +334,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=29"></script>
+<script src="assets/app.js?v=30"></script>
 <script>
 mountStudentChrome('collaboratives');
 document.querySelectorAll('.pw-card[role="button"]').forEach(function (c) {
