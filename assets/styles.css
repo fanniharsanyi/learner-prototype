@@ -579,3 +579,7 @@ img { max-width: 100%; display: block; }
 .req-row__need { font-size:12px; color:var(--gray-600); }
 .req-row__chev { color:var(--gray-400); flex:none; align-self:center; }
 .req-met { color:var(--green-700); font-weight:700; font-size:12px; display:inline-flex; align-items:center; gap:6px; }
+
+/* student requirements: "complete all" framing (AND becomes layout, not an operator) */
+.req-all-note { font-size: 14px; color: var(--gray-700); margin: 0 0 16px; }
+.req-all-note b { color: var(--c-ink); }
