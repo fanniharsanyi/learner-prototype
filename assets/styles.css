@@ -849,6 +849,7 @@ body.joined .only-joined-i { display: inline-flex; }
 .pd-head--with-actions { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
 .pd-head--with-actions .pd-head__main { flex: 1 1 auto; min-width: 0; }
 .pd-head__actions { flex: 0 0 auto; display: flex; gap: 10px; align-items: center; }
+.pd-head__actions .btn { border-radius: 999px; }
 @media (max-width: 760px) {
   .pd-head--with-actions { flex-direction: column; }
   .pd-head__actions { width: 100%; }
