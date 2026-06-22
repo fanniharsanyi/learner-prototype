@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement pathway · CVC Exchange</title>
+<link rel="stylesheet" href="assets/styles.css?v=33">
+</head>
+<body>
+<main>
+  <div class="page">
+    <a class="back" href="program-detail.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      Back to pathway
+    </a>
+
+    <div class="rq-head">
+      <div class="rq-head__tags" id="rqTags"></div>
+      <h1 class="h1" id="rqTitle">Requirement</h1>
+      <p class="rc-sub" id="rqSub"></p>
+    </div>
+
+    <div class="rq-rule" id="rqRule"></div>
+    <p class="rq-home-note" id="rqHome" hidden></p>
+
+    <div id="rqStruct"></div>
+
+    <div class="rq-cta">
+      <a class="btn btn--primary" id="rqFind" href="requirement-courses.html">Find courses for this requirement</a>
+      <span class="rq-cta__note">Enrolling is done through the CVC Exchange — no separate application.</span>
+    </div>
+  </div>
+</main>
+<script src="assets/app.js?v=33"></script>
+<script>
+mountStudentChrome('collaboratives');
+
+// Requirement structures mirror what the campus admin set up in the
+// "Define requirement details" flow: each requirement has a combine rule
+// (all = AND, any = OR) and one or more components, each holding the
+// approved courses that fulfill it.
+const REQSTRUCT = {
+  'Business Core: Introduction': {
+    desc: 'Foundational courses covering health sciences principles and academic readiness.',
+    combine: 'all', home: false,
+    components: [
+      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'BUS 101', name: 'Introduction to Business', inst: 'De Anza College', units: 3, grade: 'C' },
+        { code: 'BUS 110', name: 'Foundations of Business', inst: 'Foothill College', units: 3, grade: 'C' },
+      ]},
+      { name: 'Academic Readiness', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'GS 100', name: 'College Success', inst: 'De Anza College', units: 3, grade: 'C' },
+      ]},
+    ],
+  },
+  'Accounting Fundamentals': {
+    desc: 'Foundational courses covering business principles, ethics, and organizational structure.',
+    combine: 'all', home: false,
+    components: [
+      { name: 'Financial Accounting', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'ACCT 101', name: 'Financial Accounting', inst: 'Sonoma State University', units: 4, grade: 'C' },
+      ]},
+      { name: 'Managerial Accounting', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'ACCT 102', name: 'Managerial Accounting', inst: 'UC San Francisco', units: 4, grade: 'C' },
+      ]},
+    ],
+  },
+  'General Education: English': {
+    desc: 'Foundational courses covering reading, writing, and critical analysis.',
+    combine: 'all', home: true,
+    components: [
+      { name: 'Composition', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'ENGL 101', name: 'College Composition', inst: 'Pasadena City College', units: 4, grade: 'C' },
+      ]},
+    ],
+  },
+  'General Education: Mathematics': {
+    desc: 'Foundational quantitative reasoning courses required for the pathway.',
+    combine: 'any', home: true,
+    components: [
+      { name: 'College Algebra path', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'MATH 110', name: 'College Algebra', inst: 'Pasadena City College', units: 4, grade: 'C' },
+      ]},
+      { name: 'Statistics path', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'STAT 120', name: 'Intro to Statistics', inst: 'Pasadena City College', units: 4, grade: 'C' },
+      ]},
+    ],
+  },
+};
+
+const HOME_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>';
+
+function courseRow(c) {
+  return '<li class="comp-course">' +
+    '<div class="comp-course__main">' +
+      '<div class="comp-course__name">' + c.code + ' — ' + c.name + '</div>' +
+      '<div class="comp-course__meta">' + c.inst + ' · ' + c.units + ' units · Min grade ' + c.grade + '</div>' +
+    '</div>' +
+    '<button class="btn btn--outline btn--sm" onclick="toastNow(\'Enrolling ' + c.code + ' through the CVC Exchange\')">Enroll</button>' +
+  '</li>';
+}
+
+function componentCard(comp) {
+  return '<div class="comp">' +
+    '<div class="comp__head"><span class="comp__name">' + comp.name + '</span>' +
+      '<span class="tag">Component</span></div>' +
+    '<div class="comp__rule">' + comp.rule + '</div>' +
+    '<ul class="comp-courses">' + comp.courses.map(courseRow).join('') + '</ul>' +
+  '</div>';
+}
+
+(function render() {
+  const name = new URLSearchParams(location.search).get('req') || 'Business Core: Introduction';
+  const r = REQSTRUCT[name] || REQSTRUCT['Business Core: Introduction'];
+  document.title = name + ' · CVC Exchange';
+
+  // tags
+  let tags = '<span class="tag tag--required">Required</span>';
+  if (r.home) tags += '<span class="tag tag--home">' + HOME_SVG + ' Home institution only</span>';
+  document.getElementById('rqTags').innerHTML = tags;
+
+  document.getElementById('rqTitle').textContent = name;
+  document.getElementById('rqSub').textContent = r.desc;
+
+  // combine rule
+  const isAll = r.combine === 'all';
+  document.getElementById('rqRule').innerHTML =
+    'To fulfill this requirement, complete <b>' +
+    (isAll ? 'all of the components' : 'any one of the components') +
+    '</b> below. This structure is set by the program administrator.';
+
+  // home note
+  if (r.home) {
+    const home = document.getElementById('rqHome');
+    home.hidden = false;
+    home.innerHTML = HOME_SVG + ' These courses must be taken at your home college (Pasadena City College).';
+  }
+
+  // components, joined by AND (all) or OR (any) connectors
+  const connClass = isAll ? 'req-conn--and' : 'req-conn--or';
+  const connLabel = isAll ? 'AND' : 'OR';
+  const conn = '<div class="req-conn ' + connClass + '"><span>' + connLabel + '</span></div>';
+  document.getElementById('rqStruct').innerHTML = r.components.map(componentCard).join(conn);
+
+  // "Find courses" deep-links into the existing search for this requirement
+  document.getElementById('rqFind').href =
+    'requirement-courses.html?req=' + encodeURIComponent(name);
+})();
+</script>
+</body>
+</html>

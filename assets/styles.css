@@ -888,3 +888,37 @@ body.joined .only-joined-i { display: inline-flex; }
 .path-course__name { font-size: 14px; font-weight: 600; color: var(--c-ink); }
 .path-course__inst { font-size: 12.5px; color: var(--gray-600); margin-top: 2px; }
 .path-course--empty { font-size: 13px; color: var(--gray-500); font-style: italic; }
+
+/* ============================================================
+   v=33 additions — structured requirement pathway view
+   (learner-facing mirror of the campus admin requirement flow)
+   ============================================================ */
+.rq-head { margin-bottom: 16px; }
+.rq-head__tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.rq-rule {
+  background: var(--blue-50); border: 1px solid #CFE0F5; border-left: 4px solid var(--c-primary);
+  border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--c-text); margin-bottom: 14px;
+}
+.rq-rule b { color: var(--c-ink); font-weight: 700; }
+.rq-home-note { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #bb4200; margin: 0 0 20px; }
+.rq-home-note svg { width: 15px; height: 15px; flex: none; }
+
+.comp {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-card);
+  padding: 18px 20px; box-shadow: 0 1px 2px rgba(16,53,107,.05);
+}
+.comp__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.comp__name { font-size: 16px; font-weight: 700; color: var(--c-ink); }
+.comp__rule { font-size: 12.5px; color: var(--gray-600); margin-top: 4px; }
+.comp-courses { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.comp-course {
+  display: flex; align-items: center; gap: 14px;
+  border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 14px;
+}
+.comp-course__main { flex: 1 1 auto; min-width: 0; }
+.comp-course__name { font-size: 14px; font-weight: 600; color: var(--c-ink); }
+.comp-course__meta { font-size: 12.5px; color: var(--gray-600); margin-top: 2px; }
+.comp-course .btn { flex: none; }
+
+.rq-cta { display: flex; align-items: center; gap: 16px; margin-top: 22px; flex-wrap: wrap; }
+.rq-cta__note { font-size: 12.5px; color: var(--gray-600); }
