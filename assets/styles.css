@@ -840,3 +840,50 @@ body.joined .only-joined-i { display: inline-flex; }
 
 /* requirement rows show a small "N required to fulfill" line instead of a progress bar (Figma 449:9341) */
 .req-card__fulfill { font-size: 13px; color: var(--gray-500); margin: 12px 0 0; }
+
+/* ============================================================
+   v=31 additions
+   ============================================================ */
+
+/* Program detail — header CTAs (Get started primary + Find GE courses secondary) */
+.pd-head--with-actions { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.pd-head--with-actions .pd-head__main { flex: 1 1 auto; min-width: 0; }
+.pd-head__actions { flex: 0 0 auto; display: flex; gap: 10px; align-items: center; }
+@media (max-width: 760px) {
+  .pd-head--with-actions { flex-direction: column; }
+  .pd-head__actions { width: 100%; }
+  .pd-head__actions .btn { flex: 1; }
+}
+
+/* Requirement courses — equivalencies link + modal rows */
+.crf-equiv {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  background: none; border: 0; padding: 0; font: inherit; font-size: 14px;
+  color: var(--c-primary); font-weight: 600;
+}
+.crf-equiv:hover { text-decoration: underline; }
+.crf-equiv svg { width: 16px; height: 16px; flex: none; }
+.equiv-lead { font-size: 13px; color: var(--gray-600); margin: 0 0 14px; }
+.equiv-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 0; border-top: 1px solid var(--gray-100);
+}
+.equiv-row:first-of-type { border-top: 0; }
+.equiv-row__main { flex: 1 1 auto; min-width: 0; }
+.equiv-row__name { font-size: 14px; font-weight: 600; color: var(--c-ink); }
+.equiv-row__meta { font-size: 12.5px; color: var(--gray-600); margin-top: 3px; }
+
+/* Dashboard — stacked collaborative cards with taken courses */
+.path-cards--stack { grid-template-columns: 1fr; }
+.path-card--stacked { display: block; align-items: stretch; }
+.path-card__meta { font-size: 13px; color: var(--gray-600); margin: 2px 0 12px; }
+.path-card__meta b { color: var(--c-text); font-weight: 700; }
+.path-reqs { margin: 14px 0 4px; }
+.path-req { padding: 12px 0; border-top: 1px solid var(--gray-200); }
+.path-req:first-child { border-top: 0; }
+.path-req__name { font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--gray-600); margin-bottom: 8px; }
+.path-course { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.path-course__main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.path-course__name { font-size: 14px; font-weight: 600; color: var(--c-ink); }
+.path-course__inst { font-size: 12.5px; color: var(--gray-600); margin-top: 2px; }
+.path-course--empty { font-size: 13px; color: var(--gray-500); font-style: italic; }

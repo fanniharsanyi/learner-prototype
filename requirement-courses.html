@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Courses for requirement · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=30">
+<link rel="stylesheet" href="assets/styles.css?v=31">
 </head>
 <body>
 <main>
@@ -102,7 +102,7 @@
       <section>
         <div class="rc-results__head"><h2>Search results</h2></div>
         <div class="rc-found-row">
-          <p class="rc-found">We found <b>2 transferable courses</b> that count for this requirement.</p>
+          <p class="rc-found">We found <b>2 courses</b> that count for this requirement.</p>
           <a class="rc-save" href="#" onclick="toastNow('Search saved');return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg> Save this search</a>
         </div>
 
@@ -124,12 +124,11 @@
           <div class="course-result__facts">
             <div><div class="crf__k">Units</div><div class="crf__v">3.0 Units</div></div>
             <div><div class="crf__k">Term</div><div class="crf__v">Jun 16 - Aug 8</div></div>
-            <div><div class="crf__k">Transferability</div>
-              <div class="crt">
-                <span><img src="assets/ic-check.svg" alt=""> CSU BREADTH</span>
-                <span><img src="assets/ic-check.svg" alt=""> IGETC</span>
-                <span><img src="assets/ic-check.svg" alt=""> Cal-GETC</span>
-              </div>
+            <div><div class="crf__k">Equivalencies</div>
+              <button type="button" class="crf-equiv" onclick="openEquiv(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>
+                <span><span class="crf-equiv__count">0</span> equivalent courses</span>
+              </button>
             </div>
           </div>
           <div class="course-result__foot">
@@ -156,12 +155,11 @@
           <div class="course-result__facts">
             <div><div class="crf__k">Units</div><div class="crf__v">3.0 Units</div></div>
             <div><div class="crf__k">Term</div><div class="crf__v">Jun 16 - Aug 8</div></div>
-            <div><div class="crf__k">Transferability</div>
-              <div class="crt">
-                <span><img src="assets/ic-check.svg" alt=""> CSU BREADTH</span>
-                <span><img src="assets/ic-check.svg" alt=""> IGETC</span>
-                <span><img src="assets/ic-check.svg" alt=""> Cal-GETC</span>
-              </div>
+            <div><div class="crf__k">Equivalencies</div>
+              <button type="button" class="crf-equiv" onclick="openEquiv(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>
+                <span><span class="crf-equiv__count">0</span> equivalent courses</span>
+              </button>
             </div>
           </div>
           <div class="course-result__foot">
@@ -173,7 +171,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=30"></script>
+<script src="assets/app.js?v=31"></script>
 <script>
 mountStudentChrome('collaboratives');
 // Set the requirement name from the link that opened this page
@@ -185,6 +183,62 @@ mountStudentChrome('collaboratives');
   if (desc) document.getElementById('rcSub').textContent = desc;
   else if (req) document.getElementById('rcSub').textContent = 'Courses across partner colleges that fulfill this requirement.';
 })();
+
+/* ---- Course equivalencies, keyed by course code ---- */
+const EQUIV = {
+  'ENGLG100': [
+    { code: 'ENGL 101', name: 'College Composition', inst: 'De Anza College', units: '3.0' },
+    { code: 'ENGL 1A',  name: 'Reading & Composition', inst: 'Foothill College', units: '4.0' },
+    { code: 'ENGL 100', name: 'College Writing', inst: 'Sonoma State University', units: '3.0' },
+  ],
+  'ENGL101': [
+    { code: 'ENGLG100', name: 'Freshman Composition', inst: 'Golden West College', units: '3.0' },
+    { code: 'ENGL 1A',  name: 'Reading & Composition', inst: 'Foothill College', units: '4.0' },
+    { code: 'ENGL 105', name: 'Critical Reading & Writing', inst: 'UCLA', units: '4.0' },
+  ],
+};
+
+/* The course code is the part of the title before the first " - ". */
+function courseCode(article) {
+  var t = article.querySelector('.course-result__title');
+  return t ? t.textContent.split(' - ')[0].trim() : '';
+}
+
+/* Fill each card's equivalency count on load. */
+document.querySelectorAll('.course-result').forEach(function (article) {
+  var list = EQUIV[courseCode(article)] || [];
+  var n = article.querySelector('.crf-equiv__count');
+  if (n) n.textContent = list.length;
+});
+
+/* Open a modal listing the courses equivalent to the selected one. */
+function openEquiv(btn) {
+  var article = btn.closest('.course-result');
+  var code = courseCode(article);
+  var title = article.querySelector('.course-result__title').textContent.trim();
+  var list = EQUIV[code] || [];
+  var ov = document.createElement('div');
+  ov.className = 'modal-ov';
+  ov.innerHTML =
+    '<div class="modal" role="dialog" aria-modal="true" aria-label="Equivalent courses">' +
+      '<div class="modal__head"><h3>Courses equivalent to ' + title + '</h3>' +
+        '<button class="modal__x" data-x aria-label="Close">&times;</button></div>' +
+      '<div class="modal__body">' +
+        '<p class="equiv-lead">These courses are accepted as equivalent and count the same toward this requirement.</p>' +
+        (list.map(function (c) {
+          return '<div class="equiv-row">' +
+            '<div class="equiv-row__main"><div class="equiv-row__name">' + c.code + ' — ' + c.name + '</div>' +
+            '<div class="equiv-row__meta">' + c.inst + ' · ' + c.units + ' units</div></div>' +
+            '<span class="pill pill--done">Equivalent</span></div>';
+        }).join('') || '<p class="muted">No equivalent courses on record.</p>') +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(ov);
+  requestAnimationFrame(function () { ov.classList.add('show'); });
+  var close = function () { ov.classList.remove('show'); setTimeout(function () { ov.remove(); }, 200); };
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  ov.querySelector('[data-x]').onclick = close;
+}
 </script>
 </body>
 </html>
