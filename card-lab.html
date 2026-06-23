@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course card — design ideas · CVC Exchange</title>
+<link rel="stylesheet" href="assets/styles.css?v=35">
+<style>
+/* ============================================================
+   CARD LAB — 3 experimental course-card designs to compare.
+   All reuse the page's CVC tokens (no new visual language) and all
+   keep the accessible pattern: a full-card overlay <button> for the
+   primary action, with the title + equivalencies as separate links
+   raised above it. Enrolled = green treatment.
+   ============================================================ */
+.lab-intro { background: var(--blue-50); border: 1px solid #CFE0F5; border-left: 4px solid var(--c-primary); border-radius: 10px; padding: 16px 18px; margin-bottom: 28px; font-size: 14px; color: var(--c-text); }
+.lab-intro b { color: var(--c-ink); }
+.lab-variant { margin: 0 0 40px; }
+.lab-variant > h2 { font-size: 20px; color: var(--c-ink); margin: 0 0 4px; }
+.lab-variant > p { font-size: 13.5px; color: var(--gray-700); margin: 0 0 16px; max-width: 60ch; }
+.lab-comp { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-card); padding: 18px 20px; box-shadow: 0 1px 2px rgba(16,53,107,.05); }
+.lab-comp__head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+.lab-comp__name { font-size: 16px; font-weight: 700; color: var(--c-ink); }
+.lab-comp__rule { font-size: 12.5px; color: var(--gray-600); margin: 0 0 14px; }
+.lab-cards { display: flex; flex-direction: column; gap: 12px; }
+.lab-tag { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; color:var(--c-text); background:var(--gray-100); border:1px solid var(--gray-200); border-radius:999px; padding:3px 10px; }
+.lab-tag img { display:block; }
+.lab-equiv { position: relative; z-index: 2; background: none; border: 0; padding: 0; font: inherit; font-size: 13px; font-weight: 600; color: var(--c-primary); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.lab-equiv:hover { text-decoration: underline; }
+.lab-equiv svg { width: 15px; height: 15px; }
+.lab-pill-enrolled { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:var(--green-700); border:1px solid var(--green-600); border-radius:8px; padding:1px 9px; min-height:24px; background:#fff; }
+.lab-pill-enrolled svg { width:13px; height:13px; }
+.lab-open { font-size: 13px; font-weight: 600; color: #157a3a; display: inline-flex; align-items: center; gap: 6px; }
+.lab-open::before { content:""; width:8px; height:8px; border-radius:50%; background:#1aa251; display:inline-block; }
+
+/* shared overlay hit button */
+.hit { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer; z-index: 1; }
+.hit:focus-visible { outline: var(--focus-ring); outline-offset: -3px; border-radius: 14px; }
+.zlink { position: relative; z-index: 2; }
+
+/* ---------- Variant 1 — Quiet list card ---------- */
+.v1 { position: relative; display: flex; gap: 18px; align-items: flex-start; background: #fff; border: 1px solid var(--gray-300); border-radius: 12px; padding: 18px 20px; transition: border-color .12s, box-shadow .12s; }
+.v1:hover { border-color: var(--c-primary); box-shadow: 0 6px 18px rgba(25,83,168,.10); }
+.v1__main { flex: 1 1 auto; min-width: 0; }
+.v1__inst { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+.v1__title { display: inline-block; font-size: 18px; font-weight: 700; color: var(--c-ink); margin: 3px 0 0; text-decoration: none; }
+.v1__title:hover { color: var(--c-primary); text-decoration: underline; }
+.v1__meta { font-size: 13px; color: var(--gray-600); margin-top: 7px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.v1__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.v1__aside { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; text-align: right; }
+.v1__price { font-size: 18px; font-weight: 700; color: var(--c-ink); }
+.v1__price small { display: block; font-size: 10px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; }
+.v1__cue { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--c-primary); white-space: nowrap; }
+.v1__cue svg { width: 16px; height: 16px; }
+.v1--enrolled { border-color: var(--green-600); border-left-width: 4px; background: var(--green-bg); }
+.v1--enrolled .v1__cue { color: var(--green-700); }
+
+/* ---------- Variant 2 — Choose-one option (radio affordance) ---------- */
+.v2 { position: relative; display: flex; gap: 14px; align-items: flex-start; background: #fff; border: 1px solid var(--gray-300); border-radius: 12px; padding: 18px 20px; transition: border-color .12s, box-shadow .12s; }
+.v2:hover { border-color: var(--c-primary); box-shadow: 0 6px 18px rgba(25,83,168,.10); }
+.v2__radio { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--gray-400); margin-top: 2px; display: inline-flex; align-items: center; justify-content: center; color: #fff; transition: .12s; }
+.v2:hover .v2__radio { border-color: var(--c-primary); }
+.v2__radio svg { width: 14px; height: 14px; opacity: 0; }
+.v2__main { flex: 1 1 auto; min-width: 0; }
+.v2__inst { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+.v2__title { display: inline-block; font-size: 18px; font-weight: 700; color: var(--c-ink); margin: 3px 0 0; text-decoration: none; }
+.v2__title:hover { color: var(--c-primary); text-decoration: underline; }
+.v2__meta { font-size: 13px; color: var(--gray-600); margin-top: 7px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.v2__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.v2__aside { flex: 0 0 auto; text-align: right; }
+.v2__price { font-size: 18px; font-weight: 700; color: var(--c-ink); }
+.v2__price small { display: block; font-size: 10px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; }
+.v2__hint { font-size: 12px; font-weight: 600; color: var(--c-primary); margin-top: 10px; position: relative; z-index: 1; }
+.v2--enrolled { border-color: var(--green-600); background: var(--green-bg); }
+.v2--enrolled .v2__radio { border-color: var(--green-600); background: var(--green-600); }
+.v2--enrolled .v2__radio svg { opacity: 1; }
+.v2--enrolled .v2__hint { color: var(--green-700); }
+
+/* ---------- Variant 3 — Spec card with footer bar ---------- */
+.v3 { position: relative; background: #fff; border: 1px solid var(--gray-300); border-radius: 14px; overflow: hidden; transition: border-color .12s, box-shadow .12s; }
+.v3:hover { border-color: var(--c-primary); box-shadow: 0 6px 18px rgba(25,83,168,.10); }
+.v3__top { padding: 18px 20px 0; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.v3__instchip { display: inline-block; font-size: 11px; font-weight: 700; color: var(--c-primary); background: var(--blue-50); border-radius: 999px; padding: 3px 11px; }
+.v3__title { display: inline-block; font-size: 19px; font-weight: 700; color: var(--c-ink); margin: 10px 0 0; text-decoration: none; }
+.v3__title:hover { color: var(--c-primary); text-decoration: underline; }
+.v3__chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 20px 0; }
+.v3__facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 14px 20px 16px; }
+.v3fact__k { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; }
+.v3fact__v { font-size: 14px; font-weight: 600; color: var(--c-text); margin-top: 3px; }
+.v3__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; background: var(--gray-100); border-top: 1px solid var(--gray-200); }
+.v3__price { font-size: 17px; font-weight: 700; color: var(--c-ink); }
+.v3__price small { font-size: 11px; font-weight: 600; color: var(--gray-600); text-transform: uppercase; }
+.v3__cue { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--c-primary); }
+.v3__cue svg { width: 16px; height: 16px; }
+.v3--enrolled { border-color: var(--green-600); }
+.v3--enrolled .v3__bar { background: var(--green-bg); border-top-color: #BFE6CD; }
+.v3--enrolled .v3__cue { color: var(--green-700); }
+</style>
+</head>
+<body>
+<main>
+  <div class="page">
+    <a class="back" href="requirement-pathway.html?req=English%20Composition">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      Back to the pathway
+    </a>
+
+    <h1 class="h1" style="margin-top:10px;">Course card — 3 design ideas</h1>
+    <div class="lab-intro">
+      <b>What to compare.</b> Each idea shows the same "Required Core" component with two courses — the first is already <b>enrolled</b> (green), the second is selectable. Every idea keeps the same data and the same accessible interaction (the whole card is one keyboard-focusable control; the title and "equivalent courses" are separate links). Pick the one that reads best for a student deciding which course to take, and I'll apply it to the real pathway.
+    </div>
+
+    <div id="lab"></div>
+  </div>
+</main>
+<script src="assets/app.js?v=35"></script>
+<script>
+mountStudentChrome('collaboratives');
+
+const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>';
+const EQ = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>';
+const PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>';
+const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+function chips(c) {
+  return (c.quality ? '<span class="lab-tag"><img class="cr-ic-q" src="assets/ic-quality.png" alt="">Quality Reviewed</span>' : '') +
+         (c.ztc ? '<span class="lab-tag"><img class="cr-ic-z" src="assets/ic-ztc.png" alt="">Zero Textbook Cost</span>' : '');
+}
+function equivBtn(c) {
+  const n = (c.equiv || []).length;
+  if (!n) return '<span style="font-size:13px;color:var(--gray-500);">No equivalents</span>';
+  return '<button type="button" class="lab-equiv zlink" onclick="labEquiv(\'' + c.code + '\')">' + EQ + n + ' equivalent course' + (n === 1 ? '' : 's') + '</button>';
+}
+function aria(c, enrolled) {
+  return (enrolled ? 'View your enrollment in ' : 'Add ') + c.code + ' — ' + c.name + (enrolled ? '' : ' to this requirement');
+}
+function act() { toastNow('Prototype — enroll / view enrollment happens here'); }
+
+/* ---------- Variant 1 ---------- */
+function v1(code, enrolled) {
+  const c = COURSE_CATALOG[code];
+  return '<article class="v1' + (enrolled ? ' v1--enrolled' : '') + '">' +
+    '<div class="v1__main">' +
+      '<div class="v1__inst">' + esc(c.inst) + '</div>' +
+      '<a class="v1__title zlink" href="course-detail.html?code=' + encodeURIComponent(code) + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
+      '<div class="v1__meta">' + esc(c.units) + ' units <span>·</span> Min grade ' + esc(c.grade) + ' <span>·</span> C-ID ' + esc(c.cid) + ' <span>·</span> ' + equivBtn(c) + '</div>' +
+      '<div class="v1__chips">' + chips(c) + '</div>' +
+    '</div>' +
+    '<div class="v1__aside">' +
+      (enrolled ? '<span class="lab-pill-enrolled">' + CHECK + ' Enrolled</span>' : '<span class="lab-open">Open</span>') +
+      '<span class="v1__price"><small>Tuition</small>' + esc(c.tuition) + '</span>' +
+      '<span class="v1__cue">' + (enrolled ? 'View enrollment ' + ARROW : PLUS + ' Add to requirement') + '</span>' +
+    '</div>' +
+    '<button class="hit" aria-label="' + esc(aria(c, enrolled)) + '" onclick="act()"></button>' +
+  '</article>';
+}
+
+/* ---------- Variant 2 ---------- */
+function v2(code, enrolled) {
+  const c = COURSE_CATALOG[code];
+  return '<article class="v2' + (enrolled ? ' v2--enrolled' : '') + '">' +
+    '<span class="v2__radio" aria-hidden="true">' + CHECK + '</span>' +
+    '<div class="v2__main">' +
+      '<div class="v2__inst">' + esc(c.inst) + '</div>' +
+      '<a class="v2__title zlink" href="course-detail.html?code=' + encodeURIComponent(code) + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
+      '<div class="v2__meta">' + esc(c.units) + ' units <span>·</span> Min grade ' + esc(c.grade) + ' <span>·</span> C-ID ' + esc(c.cid) + ' <span>·</span> ' + equivBtn(c) + '</div>' +
+      '<div class="v2__chips">' + chips(c) + '</div>' +
+      '<div class="v2__hint">' + (enrolled ? CHECK_INLINE() + ' Enrolled — this is your pick' : 'Select this course') + '</div>' +
+    '</div>' +
+    '<div class="v2__aside"><span class="v2__price"><small>Tuition</small>' + esc(c.tuition) + '</span></div>' +
+    '<button class="hit" aria-label="' + esc(aria(c, enrolled)) + '" onclick="act()"></button>' +
+  '</article>';
+}
+function CHECK_INLINE() { return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align:-2px;"><path d="M5 13l4 4L19 7"/></svg>'; }
+
+/* ---------- Variant 3 ---------- */
+function v3(code, enrolled) {
+  const c = COURSE_CATALOG[code];
+  return '<article class="v3' + (enrolled ? ' v3--enrolled' : '') + '">' +
+    '<div class="v3__top">' +
+      '<div><span class="v3__instchip">' + esc(c.inst) + '</span>' +
+        '<br><a class="v3__title zlink" href="course-detail.html?code=' + encodeURIComponent(code) + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a></div>' +
+      (enrolled ? '<span class="lab-pill-enrolled">' + CHECK + ' Enrolled</span>' : '<span class="lab-open">Open</span>') +
+    '</div>' +
+    '<div class="v3__chips">' + chips(c) + '</div>' +
+    '<div class="v3__facts">' +
+      '<div><div class="v3fact__k">Units</div><div class="v3fact__v">' + esc(c.units) + '</div></div>' +
+      '<div><div class="v3fact__k">Min grade</div><div class="v3fact__v">' + esc(c.grade) + '</div></div>' +
+      '<div><div class="v3fact__k">C-ID</div><div class="v3fact__v">' + esc(c.cid) + '</div></div>' +
+      '<div><div class="v3fact__k">Equivalencies</div><div class="v3fact__v">' + equivBtn(c) + '</div></div>' +
+    '</div>' +
+    '<div class="v3__bar">' +
+      '<span class="v3__price"><small>Tuition </small>' + esc(c.tuition) + '</span>' +
+      '<span class="v3__cue">' + (enrolled ? 'View enrollment ' + ARROW : PLUS + ' Add to requirement') + '</span>' +
+    '</div>' +
+    '<button class="hit" aria-label="' + esc(aria(c, enrolled)) + '" onclick="act()"></button>' +
+  '</article>';
+}
+
+function variantBlock(n, title, desc, fn) {
+  return '<section class="lab-variant">' +
+    '<h2>Idea ' + n + ' — ' + esc(title) + '</h2>' +
+    '<p>' + esc(desc) + '</p>' +
+    '<div class="lab-comp">' +
+      '<div class="lab-comp__head"><span class="lab-comp__name">Required Core</span><span class="tag">Component</span></div>' +
+      '<div class="lab-comp__rule">Pick 1 course · Min grade C</div>' +
+      '<div class="lab-cards">' + fn('ENGL 101', true) + fn('ENGL 105', false) + '</div>' +
+    '</div>' +
+  '</section>';
+}
+
+document.getElementById('lab').innerHTML =
+  variantBlock(1, 'Quiet list card',
+    'Light and content-first — drops the heavy grey header so it sits calmly inside the component. Course name leads, facts read as one scannable line, badges as soft chips, and tuition plus the action sit on the right. Best for quickly scanning a list of options.', v1) +
+  variantBlock(2, 'Choose-one option',
+    'Frames each course as a selectable option with a radio dot on the left — the clearest "pick one" signal for students. The dot fills green with a check once chosen, so the decision and its result are obvious at a glance.', v2) +
+  variantBlock(3, 'Spec card',
+    'A structured spec sheet: institution chip, prominent title, a four-column facts grid, and a clear action bar across the bottom. Most detailed and self-explanatory, with a stronger call to action — good when each choice deserves a closer look.', v3);
+
+/* compact equivalencies modal (shared) */
+function labEquiv(code) {
+  const c = COURSE_CATALOG[code]; if (!c) return;
+  const list = c.equiv || [];
+  const ov = document.createElement('div'); ov.className = 'modal-ov';
+  ov.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-label="Equivalent courses">' +
+    '<div class="modal__head"><h3>Courses equivalent to ' + esc(c.code) + '</h3><button class="modal__x" data-x aria-label="Close">&times;</button></div>' +
+    '<div class="modal__body"><p class="equiv-lead">These count the same toward this requirement.</p>' +
+    list.map(function (e) { return '<div class="equiv-row"><div class="equiv-row__main"><div class="equiv-row__name">' + esc(e.code) + ' — ' + esc(e.name) + '</div><div class="equiv-row__meta">' + esc(e.inst) + ' · ' + esc(e.units) + ' units · C-ID ' + esc(e.cid) + '</div></div><span class="pill pill--done">Equivalent</span></div>'; }).join('') +
+    '</div></div>';
+  document.body.appendChild(ov); requestAnimationFrame(function () { ov.classList.add('show'); });
+  const close = function () { ov.classList.remove('show'); setTimeout(function () { ov.remove(); }, 200); };
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  ov.querySelector('[data-x]').onclick = close;
+}
+</script>
+</body>
+</html>
