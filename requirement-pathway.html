@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirement pathway · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=35">
+<link rel="stylesheet" href="assets/styles.css?v=36">
 </head>
 <body>
 <main>
@@ -28,7 +28,7 @@
     <p class="rq-cta__note" style="margin-top:20px;">Enrolling is done through the CVC Exchange — no separate application to the teaching college.</p>
   </div>
 </main>
-<script src="assets/app.js?v=35"></script>
+<script src="assets/app.js?v=36"></script>
 <script>
 mountStudentChrome('collaboratives');
 
@@ -64,6 +64,7 @@ const REQSTRUCT = {
 const HOME_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>';
 const CHECK_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>';
 const EQ_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>';
+const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
 const reqName = new URLSearchParams(location.search).get('req') || 'English Composition';
 const req = REQSTRUCT[reqName] || REQSTRUCT['English Composition'];
@@ -78,42 +79,28 @@ function courseCard(code, reqName) {
   const detailHref = 'course-detail.html?req=' + encodeURIComponent(reqName) + '&code=' + encodeURIComponent(code);
   const action = enrolled
     ? 'View your enrollment in ' + c.code + ' — ' + c.name
-    : 'Add ' + c.code + ' — ' + c.name + ' to this requirement and enroll through the CVC Exchange';
-  const cue = enrolled
-    ? 'View enrollment'
-    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add to requirement';
+    : 'Enroll in ' + c.code + ' — ' + c.name + ' through the CVC Exchange';
+  const equiv = eqCount
+    ? '<button type="button" class="crf-equiv" data-equiv="' + esc(code) + '">' + EQ_SVG + '<span>' + eqCount + ' equivalent course' + (eqCount === 1 ? '' : 's') + '</span></button>'
+    : '<span class="ccard__meta-muted">No equivalents</span>';
+  const chips =
+    (c.quality ? '<span class="ccard__chip"><img class="cr-ic-q" src="assets/ic-quality.png" alt=""> Quality Reviewed</span>' : '') +
+    (c.ztc ? '<span class="ccard__chip"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' : '');
 
   return '<article class="ccard' + (enrolled ? ' ccard--enrolled' : '') + '" data-code="' + esc(code) + '">' +
-    '<div class="ccard__body">' +
-      '<div class="ccard__head">' +
-        '<div class="ccard__id">' +
-          '<div class="ccard__inst">' + esc(c.inst) + '</div>' +
-          '<a class="ccard__title" href="' + detailHref + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
-          '<div class="ccard__cid">C-ID: <b>' + esc(c.cid) + '</b></div>' +
-        '</div>' +
-        '<div class="ccard__status">' +
-          (enrolled
-            ? '<span class="pill pill--done">' + CHECK_SVG + ' Enrolled</span>'
-            : '<span class="ccard__open">' + esc(c.status) + '</span>') +
-        '</div>' +
-      '</div>' +
-      '<div class="ccard__badges">' +
-        (c.quality ? '<span class="ccard__badge"><img class="cr-ic-q" src="assets/ic-quality.png" alt=""> Quality Reviewed</span>' : '') +
-        (c.ztc ? '<span class="ccard__badge"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' : '') +
-      '</div>' +
-      '<div class="ccard__facts">' +
-        '<div><div class="crf__k">Units</div><div class="crf__v">' + esc(c.units) + ' Units</div></div>' +
-        '<div><div class="crf__k">Min grade</div><div class="crf__v">' + esc(c.grade) + '</div></div>' +
-        '<div><div class="crf__k">Equivalencies</div>' +
-          (eqCount
-            ? '<button type="button" class="crf-equiv" data-equiv="' + esc(code) + '">' + EQ_SVG + '<span>' + eqCount + ' equivalent course' + (eqCount === 1 ? '' : 's') + '</span></button>'
-            : '<div class="crf__v crf__v--muted">None on record</div>') +
-        '</div>' +
-      '</div>' +
-      '<div class="ccard__foot">' +
-        '<span><span class="ccard__tk">Tuition</span> <span class="ccard__price">' + esc(c.tuition) + '</span></span>' +
-        '<span class="ccard__cue' + (enrolled ? ' ccard__cue--enrolled' : '') + '" aria-hidden="true">' + cue + '</span>' +
-      '</div>' +
+    '<div class="ccard__main">' +
+      '<div class="ccard__inst">' + esc(c.inst) + '</div>' +
+      '<a class="ccard__title" href="' + detailHref + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
+      '<div class="ccard__meta">' + esc(c.units) + ' units <span aria-hidden="true">·</span> Min grade ' + esc(c.grade) +
+        ' <span aria-hidden="true">·</span> C-ID ' + esc(c.cid) + ' <span aria-hidden="true">·</span> ' + equiv + '</div>' +
+      '<div class="ccard__chips">' + chips + '</div>' +
+    '</div>' +
+    '<div class="ccard__aside">' +
+      (enrolled
+        ? '<span class="pill pill--done">' + CHECK_SVG + ' Enrolled</span>'
+        : '<span class="ccard__open">' + esc(c.status) + '</span>') +
+      '<span class="ccard__price"><small>Tuition</small>' + esc(c.tuition) + '</span>' +
+      '<span class="ccard__cue">' + (enrolled ? 'View enrollment ' : 'Enroll ') + ARROW_SVG + '</span>' +
     '</div>' +
     '<button type="button" class="ccard__hit" data-enroll="' + esc(code) + '" aria-label="' + esc(action) + '"></button>' +
   '</article>';
@@ -125,8 +112,7 @@ function paintComponent(host, comp, ci) {
   const selected = comp.codes.filter(isEnrolled)[0] || null;
   const others = comp.codes.filter(function (c) { return c !== selected; });
   let html =
-    '<div class="comp__head"><span class="comp__name">' + esc(comp.name) + '</span>' +
-      '<span class="tag">Component</span></div>' +
+    '<div class="comp__head"><span class="comp__name">' + esc(comp.name) + '</span></div>' +
     '<div class="comp__rule">' + esc(comp.rule) + '</div>';
 
   if (selected) {
