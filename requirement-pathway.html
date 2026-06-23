@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirement pathway · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=34">
+<link rel="stylesheet" href="assets/styles.css?v=35">
 </head>
 <body>
 <main>
@@ -25,98 +25,207 @@
 
     <div id="rqStruct"></div>
 
-    <div class="rq-cta">
-      <a class="btn btn--primary" id="rqFind" href="requirement-courses.html">Find courses for this requirement</a>
-      <span class="rq-cta__note">Enrolling is done through the CVC Exchange — no separate application.</span>
-    </div>
+    <p class="rq-cta__note" style="margin-top:20px;">Enrolling is done through the CVC Exchange — no separate application to the teaching college.</p>
   </div>
 </main>
-<script src="assets/app.js?v=34"></script>
+<script src="assets/app.js?v=35"></script>
 <script>
 mountStudentChrome('collaboratives');
 
-// Requirement structures mirror what the campus admin set up in the
-// "Define requirement details" flow: each requirement has a combine rule
-// (all = AND, any = OR) and one or more components, each holding the
-// approved courses that fulfill it.
+/* Requirement structures mirror the campus-admin "Define requirement details"
+   flow: each requirement has a combine rule (all = AND, any = OR) and one or
+   more components, each holding the approved courses (by code) that fulfill it.
+   Full course data lives in COURSE_CATALOG (assets/app.js). */
 const REQSTRUCT = {
   'English Composition': {
     desc: 'Complete one approved English composition course.',
     combine: 'all', home: false,
     components: [
-      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'ENGL 101', name: 'College Composition', inst: 'UCLA', units: 4, grade: 'C' },
-        { code: 'ENGL 105', name: 'Critical Reading & Writing', inst: 'USC', units: 4, grade: 'C' },
-      ]},
+      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', codes: ['ENGL 101', 'ENGL 105'] },
     ],
   },
   'Introduction to Psychology': {
     desc: 'Complete one approved introductory psychology course.',
     combine: 'all', home: false,
     components: [
-      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'PSYC 101', name: 'Introduction to Psychology', inst: 'UCLA', units: 4, grade: 'C' },
-        { code: 'PSYC 100', name: 'General Psychology', inst: 'USC', units: 4, grade: 'C' },
-      ]},
+      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', codes: ['PSYC 101', 'PSYC 100'] },
     ],
   },
   'General Education: Mathematics': {
     desc: 'Complete one approved college-level mathematics course.',
     combine: 'any', home: true,
     components: [
-      { name: 'College Algebra path', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'MATH 110', name: 'College Algebra', inst: 'UC San Diego', units: 3, grade: 'C' },
-      ]},
-      { name: 'Statistics path', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'STAT 120', name: 'Intro to Statistics', inst: 'UC San Diego', units: 3, grade: 'C' },
-      ]},
+      { name: 'College Algebra path', rule: 'Pick 1 course · Min grade C', codes: ['MATH 110'] },
+      { name: 'Statistics path', rule: 'Pick 1 course · Min grade C', codes: ['STAT 120'] },
     ],
   },
 };
 
 const HOME_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>';
+const CHECK_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>';
+const EQ_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>';
 
-function courseRow(c) {
-  return '<li class="comp-course">' +
-    '<div class="comp-course__main">' +
-      '<div class="comp-course__name">' + c.code + ' — ' + c.name + '</div>' +
-      '<div class="comp-course__meta">' + c.inst + ' · ' + c.units + ' units · Min grade ' + c.grade + '</div>' +
+const reqName = new URLSearchParams(location.search).get('req') || 'English Composition';
+const req = REQSTRUCT[reqName] || REQSTRUCT['English Composition'];
+document.title = reqName + ' · CVC Exchange';
+
+/* ---- A single merged course card (was requirement-courses + pathway) ---- */
+function courseCard(code, reqName) {
+  const c = COURSE_CATALOG[code];
+  if (!c) return '';
+  const enrolled = isEnrolled(code);
+  const eqCount = (c.equiv || []).length;
+  const detailHref = 'course-detail.html?req=' + encodeURIComponent(reqName) + '&code=' + encodeURIComponent(code);
+  const action = enrolled
+    ? 'View your enrollment in ' + c.code + ' — ' + c.name
+    : 'Add ' + c.code + ' — ' + c.name + ' to this requirement and enroll through the CVC Exchange';
+  const cue = enrolled
+    ? 'View enrollment'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add to requirement';
+
+  return '<article class="ccard' + (enrolled ? ' ccard--enrolled' : '') + '" data-code="' + esc(code) + '">' +
+    '<div class="ccard__body">' +
+      '<div class="ccard__head">' +
+        '<div class="ccard__id">' +
+          '<div class="ccard__inst">' + esc(c.inst) + '</div>' +
+          '<a class="ccard__title" href="' + detailHref + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
+          '<div class="ccard__cid">C-ID: <b>' + esc(c.cid) + '</b></div>' +
+        '</div>' +
+        '<div class="ccard__status">' +
+          (enrolled
+            ? '<span class="pill pill--done">' + CHECK_SVG + ' Enrolled</span>'
+            : '<span class="ccard__open">' + esc(c.status) + '</span>') +
+        '</div>' +
+      '</div>' +
+      '<div class="ccard__badges">' +
+        (c.quality ? '<span class="ccard__badge"><img class="cr-ic-q" src="assets/ic-quality.png" alt=""> Quality Reviewed</span>' : '') +
+        (c.ztc ? '<span class="ccard__badge"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' : '') +
+      '</div>' +
+      '<div class="ccard__facts">' +
+        '<div><div class="crf__k">Units</div><div class="crf__v">' + esc(c.units) + ' Units</div></div>' +
+        '<div><div class="crf__k">Min grade</div><div class="crf__v">' + esc(c.grade) + '</div></div>' +
+        '<div><div class="crf__k">Equivalencies</div>' +
+          (eqCount
+            ? '<button type="button" class="crf-equiv" data-equiv="' + esc(code) + '">' + EQ_SVG + '<span>' + eqCount + ' equivalent course' + (eqCount === 1 ? '' : 's') + '</span></button>'
+            : '<div class="crf__v crf__v--muted">None on record</div>') +
+        '</div>' +
+      '</div>' +
+      '<div class="ccard__foot">' +
+        '<span><span class="ccard__tk">Tuition</span> <span class="ccard__price">' + esc(c.tuition) + '</span></span>' +
+        '<span class="ccard__cue' + (enrolled ? ' ccard__cue--enrolled' : '') + '" aria-hidden="true">' + cue + '</span>' +
+      '</div>' +
     '</div>' +
-    '<button class="btn btn--outline btn--sm" onclick="toastNow(\'Enrolling ' + c.code + ' through the CVC Exchange\')">Enroll</button>' +
-  '</li>';
+    '<button type="button" class="ccard__hit" data-enroll="' + esc(code) + '" aria-label="' + esc(action) + '"></button>' +
+  '</article>';
 }
 
-function componentCard(comp) {
-  return '<div class="comp">' +
-    '<div class="comp__head"><span class="comp__name">' + comp.name + '</span>' +
+/* Render one component: all cards, or (once a course is picked) just the
+   selected card plus an accordion of the others. */
+function paintComponent(host, comp, ci) {
+  const selected = comp.codes.filter(isEnrolled)[0] || null;
+  const others = comp.codes.filter(function (c) { return c !== selected; });
+  let html =
+    '<div class="comp__head"><span class="comp__name">' + esc(comp.name) + '</span>' +
       '<span class="tag">Component</span></div>' +
-    '<div class="comp__rule">' + comp.rule + '</div>' +
-    '<ul class="comp-courses">' + comp.courses.map(courseRow).join('') + '</ul>' +
-  '</div>';
+    '<div class="comp__rule">' + esc(comp.rule) + '</div>';
+
+  if (selected) {
+    html += '<div class="comp-cards">' + courseCard(selected, reqName) + '</div>';
+    if (others.length) {
+      const panelId = 'more-' + ci;
+      html += '<div class="ccard-more">' +
+        '<button type="button" class="ccard-more__btn" aria-expanded="false" aria-controls="' + panelId + '">' +
+          '<span>Show other courses (' + others.length + ')</span>' +
+          '<svg class="ccard-more__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
+        '</button>' +
+        '<div class="ccard-more__panel comp-cards" id="' + panelId + '" hidden>' +
+          others.map(function (code) { return courseCard(code, reqName); }).join('') +
+        '</div>' +
+      '</div>';
+    }
+  } else {
+    html += '<div class="comp-cards">' + comp.codes.map(function (code) { return courseCard(code, reqName); }).join('') + '</div>';
+  }
+
+  host.innerHTML = html;
+  wireComponent(host, comp, ci);
+}
+
+function wireComponent(host, comp, ci) {
+  // Enroll / view via the full-card overlay button.
+  host.querySelectorAll('.ccard__hit').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const code = btn.dataset.enroll;
+      if (isEnrolled(code)) {
+        toastNow('Opens your enrollment in ' + code);
+        return;
+      }
+      // Pick-1: enrolling a course replaces any other pick in this component.
+      comp.codes.forEach(function (c) { if (c !== code) unenrollCourse(c); });
+      enrollCourse(code);
+      paintComponent(host, comp, ci);
+      toastNow(code + ' added to this requirement');
+    });
+  });
+  // Accordion toggle.
+  const acc = host.querySelector('.ccard-more__btn');
+  if (acc) {
+    acc.addEventListener('click', function () {
+      const open = acc.getAttribute('aria-expanded') === 'true';
+      acc.setAttribute('aria-expanded', String(!open));
+      const panel = document.getElementById(acc.getAttribute('aria-controls'));
+      if (panel) panel.hidden = open;
+    });
+  }
+  // Equivalency modal.
+  host.querySelectorAll('.crf-equiv').forEach(function (b) {
+    b.addEventListener('click', function () { openEquivModal(b.dataset.equiv); });
+  });
+}
+
+function openEquivModal(code) {
+  const c = COURSE_CATALOG[code]; if (!c) return;
+  const list = c.equiv || [];
+  const ov = document.createElement('div');
+  ov.className = 'modal-ov';
+  ov.innerHTML =
+    '<div class="modal" role="dialog" aria-modal="true" aria-label="Equivalent courses">' +
+      '<div class="modal__head"><h3>Courses equivalent to ' + esc(c.code) + ' — ' + esc(c.name) + '</h3>' +
+        '<button class="modal__x" data-x aria-label="Close">&times;</button></div>' +
+      '<div class="modal__body">' +
+        '<p class="equiv-lead">These courses are accepted as equivalent and count the same toward this requirement.</p>' +
+        (list.map(function (e) {
+          return '<div class="equiv-row"><div class="equiv-row__main">' +
+            '<div class="equiv-row__name">' + esc(e.code) + ' — ' + esc(e.name) + '</div>' +
+            '<div class="equiv-row__meta">' + esc(e.inst) + ' · ' + esc(e.units) + ' units · C-ID ' + esc(e.cid) + '</div>' +
+            '</div><span class="pill pill--done">Equivalent</span></div>';
+        }).join('') || '<p class="muted">No equivalent courses on record.</p>') +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(ov);
+  requestAnimationFrame(function () { ov.classList.add('show'); });
+  const close = function () { ov.classList.remove('show'); setTimeout(function () { ov.remove(); }, 200); };
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  ov.querySelector('[data-x]').onclick = close;
+  document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
 }
 
 (function render() {
-  const name = new URLSearchParams(location.search).get('req') || 'English Composition';
-  const r = REQSTRUCT[name] || REQSTRUCT['English Composition'];
-  document.title = name + ' · CVC Exchange';
-
   // tags
   let tags = '<span class="tag tag--required">Required</span>';
-  if (r.home) tags += '<span class="tag tag--home">' + HOME_SVG + ' Home institution only</span>';
+  if (req.home) tags += '<span class="tag tag--home">' + HOME_SVG + ' Home institution only</span>';
   document.getElementById('rqTags').innerHTML = tags;
 
-  document.getElementById('rqTitle').textContent = name;
-  document.getElementById('rqSub').textContent = r.desc;
+  document.getElementById('rqTitle').textContent = reqName;
+  document.getElementById('rqSub').textContent = req.desc;
 
-  // combine rule
-  const isAll = r.combine === 'all';
+  const isAll = req.combine === 'all';
   document.getElementById('rqRule').innerHTML =
     'To fulfill this requirement, complete <b>' +
     (isAll ? 'all of the components' : 'any one of the components') +
     '</b> below. This structure is set by the program administrator.';
 
-  // home note
-  if (r.home) {
+  if (req.home) {
     const home = document.getElementById('rqHome');
     home.hidden = false;
     home.innerHTML = HOME_SVG + ' These courses must be taken at your home college (UC San Diego).';
@@ -125,12 +234,19 @@ function componentCard(comp) {
   // components, joined by AND (all) or OR (any) connectors
   const connClass = isAll ? 'req-conn--and' : 'req-conn--or';
   const connLabel = isAll ? 'AND' : 'OR';
-  const conn = '<div class="req-conn ' + connClass + '"><span>' + connLabel + '</span></div>';
-  document.getElementById('rqStruct').innerHTML = r.components.map(componentCard).join(conn);
-
-  // "Find courses" deep-links into the existing search for this requirement
-  document.getElementById('rqFind').href =
-    'requirement-courses.html?req=' + encodeURIComponent(name);
+  const root = document.getElementById('rqStruct');
+  req.components.forEach(function (comp, ci) {
+    if (ci > 0) {
+      const conn = document.createElement('div');
+      conn.className = 'req-conn ' + connClass;
+      conn.innerHTML = '<span>' + connLabel + '</span>';
+      root.appendChild(conn);
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'comp';
+    root.appendChild(wrap);
+    paintComponent(wrap, comp, ci);
+  });
 })();
 </script>
 </body>

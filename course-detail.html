@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course detail · CVC Exchange</title>
+<link rel="stylesheet" href="assets/styles.css?v=35">
+</head>
+<body>
+<main>
+  <div class="page">
+    <a class="back" id="cdBack" href="requirement-pathway.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+      Back
+    </a>
+
+    <div class="cd-grid">
+      <!-- LEFT: course card -->
+      <article class="cd-card">
+        <div class="cd-card__band">
+          <div class="cd-card__bandtop">
+            <span class="cd-inst" id="cdInst"></span>
+            <button class="cd-fav" type="button" onclick="toastNow('Saved to your favorites')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.35-9.5-8.5C.5 9 2 5.5 5.5 5.5c2 0 3.5 1.2 4.5 2.5 1-1.3 2.5-2.5 4.5-2.5C18 5.5 19.5 9 17.5 12.5 15 16.65 12 21 12 21z"/></svg>
+              Save to Favorites
+            </button>
+          </div>
+          <h1 class="h1 cd-title" id="cdTitle">Course</h1>
+        </div>
+
+        <div class="cd-cidbar">C-ID: <b id="cdCid"></b></div>
+
+        <div class="cd-sec">
+          <h2 class="cd-h2">Course Description</h2>
+          <p class="cd-desc" id="cdDesc"></p>
+
+          <div id="cdPrereqWrap" hidden>
+            <h3 class="cd-h3">Prerequisites:</h3>
+            <p class="cd-prereq-text" id="cdPrereqText"></p>
+            <div class="cd-alert" role="note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+              This course has prerequisites that must be verified
+            </div>
+          </div>
+        </div>
+
+        <div class="cd-sec cd-sec--top">
+          <h2 class="cd-h2">Transfer Information</h2>
+          <p class="cd-transfer" id="cdTransfer"></p>
+          <ul class="cd-equiv-list" id="cdEquivList"></ul>
+          <p class="cd-fine">This course <u>may</u> count toward your program of study based on <a href="#" onclick="toastNow('Opens assist.org');return false;">assist.org</a> data and C-ID, which identifies lower-division transfer courses commonly articulated between California Community Colleges and four-year universities. Prior to enrollment, please meet with a counselor or academic advisor to confirm it satisfies your program requirements.</p>
+        </div>
+      </article>
+
+      <!-- RIGHT: sidebar -->
+      <aside class="cd-side">
+        <div class="cd-side__row">
+          <h2 class="cd-side__k">Tuition &amp; Fees</h2>
+          <p class="cd-price" id="cdPrice"></p>
+          <p class="cd-side__note">Tuition and mandatory fees only. Financial aid may apply. Please contact your local Financial Aid Office for details.</p>
+        </div>
+        <div class="cd-side__row cd-side__row--inline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+          <span>Transferable Credit</span>
+        </div>
+        <div class="cd-side__row">
+          <h2 class="cd-side__k">Location</h2>
+          <p class="cd-side__v" id="cdLocation"></p>
+        </div>
+        <div class="cd-side__row">
+          <h2 class="cd-side__k">Units</h2>
+          <p class="cd-side__v" id="cdUnits"></p>
+        </div>
+        <div class="cd-side__row cd-side__row--last">
+          <h2 class="cd-side__k">Badges</h2>
+          <div class="cd-badges" id="cdBadges"></div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Course sections -->
+    <section class="cd-sections">
+      <h2 class="cd-h2">Course Sections</h2>
+      <div class="cd-alert" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        Seat counts change rapidly; these numbers may not reflect current seat availability.
+      </div>
+      <div class="cd-alert" id="cdPrereqAlert" role="note" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        This course has prerequisites that must be verified
+      </div>
+
+      <div id="cdSectionList"></div>
+    </section>
+
+    <p class="cd-faq">Questions? <a href="#" onclick="toastNow('Opens the FAQ');return false;">Visit our FAQ section</a></p>
+  </div>
+</main>
+<script src="assets/app.js?v=35"></script>
+<script>
+mountStudentChrome('collaboratives');
+
+const params = new URLSearchParams(location.search);
+const code = params.get('code') || 'ENGL 101';
+const reqName = params.get('req') || '';
+const c = COURSE_CATALOG[code] || COURSE_CATALOG['ENGL 101'];
+
+document.title = c.code + ' — ' + c.name + ' · CVC Exchange';
+if (reqName) document.getElementById('cdBack').href = 'requirement-pathway.html?req=' + encodeURIComponent(reqName);
+
+document.getElementById('cdInst').textContent = c.inst;
+document.getElementById('cdTitle').textContent = c.code + ' - ' + c.name;
+document.getElementById('cdCid').textContent = c.cid;
+document.getElementById('cdDesc').textContent = c.desc;
+document.getElementById('cdPrice').textContent = c.tuition;
+document.getElementById('cdLocation').textContent = c.location;
+document.getElementById('cdUnits').textContent = c.units + ' semester units';
+
+document.getElementById('cdBadges').innerHTML =
+  (c.ztc ? '<span class="cd-badge"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' : '') +
+  (c.quality ? '<span class="cd-badge"><img class="cr-ic-q" src="assets/ic-quality.png" alt=""> Quality Reviewed</span>' : '') ||
+  '<span class="cd-side__v">None</span>';
+
+// Prerequisites (description section + sections alert)
+if (c.prereq) {
+  document.getElementById('cdPrereqWrap').hidden = false;
+  document.getElementById('cdPrereqText').textContent = 'Prerequisite: ' + c.prereq;
+  document.getElementById('cdPrereqAlert').hidden = false;
+}
+
+// Transfer Information
+document.getElementById('cdTransfer').innerHTML =
+  '<b>' + esc(c.code) + ' - ' + esc(c.name) + '</b> from ' + esc(c.inst) + '.';
+document.getElementById('cdEquivList').innerHTML = (c.equiv || []).map(function (e) {
+  return '<li class="cd-equiv">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>' +
+    '<span>equivalent to <b>' + esc(e.code) + ' - ' + esc(e.name) + '</b> at ' + esc(e.inst) +
+    ' (<b>C-ID: ' + esc(e.cid) + '</b>)</span></li>';
+}).join('') || '<li class="cd-equiv cd-equiv--none">No transfer equivalencies on record.</li>';
+
+/* Course sections — each with an "Add Class" action that enrolls the course
+   so it appears back in the requirement group on the pathway page. */
+function sectionRow(s, idx) {
+  const enrolled = isEnrolled(code);
+  const btn = enrolled
+    ? '<button type="button" class="cd-add cd-add--done" disabled>' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg> Added</button>'
+    : '<button type="button" class="cd-add" data-add="' + idx + '">Add Class</button>';
+  return '<div class="cd-secblock">' +
+    '<h3 class="cd-term">' + esc(s.term) + '</h3>' +
+    '<div class="cd-section">' +
+      '<div class="cd-section__bar">' +
+        '<div class="cd-section__meta">' +
+          '<span class="cd-section__dates">' + esc(s.dates) + '</span>' +
+          '<span class="cd-section__cell"><b>CRN:</b> ' + esc(s.crn) + '</span>' +
+          '<span class="cd-section__cell"><b>Format:</b> <span class="cd-link">' + esc(s.format) + '</span></span>' +
+          (s.ztc ? '<span class="cd-section__cell"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' : '') +
+        '</div>' +
+        '<div class="cd-section__act"><span class="cd-section__status">' + esc(s.status) + '</span>' + btn + '</div>' +
+      '</div>' +
+      '<div class="cd-section__body">' +
+        '<div class="cd-section__facts">' +
+          '<span><b>Time:</b> ' + esc(s.time) + '</span>' +
+          '<span><b>Professor(s):</b> ' + esc(s.prof) + '</span>' +
+          '<span><b>Live Seat Count:</b> ' + esc(s.seats) + ' <em>(less than a minute ago)</em></span>' +
+          '<span class="cd-section__price">' + esc(s.price) + '</span>' +
+        '</div>' +
+        '<div class="cd-section__notes"><b>Section notes:</b> ' + esc(s.notes) + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderSections() {
+  document.getElementById('cdSectionList').innerHTML = c.sections.map(sectionRow).join('');
+  document.querySelectorAll('.cd-add[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      enrollCourse(code);
+      flashToast(code + ' added to ' + (reqName || 'your requirement'));
+      renderSections();
+      showPendingToast();
+    });
+  });
+}
+renderSections();
+</script>
+</body>
+</html>

@@ -252,6 +252,110 @@ function refreshIdeal() {
 }
 document.addEventListener('DOMContentLoaded', initIdeal);
 
+/* ============================================================
+   Shared course catalog — single source of truth for the merged
+   requirement pathway (cards) and the course-detail page. Keyed by
+   course code so both pages render identical data and can't drift.
+   ============================================================ */
+const COURSE_CATALOG = {
+  'ENGL 101': {
+    code: 'ENGL 101', name: 'College Composition', inst: 'UCLA', units: '4.0', grade: 'C',
+    cid: 'ENGL 100', tuition: '$172.00', ztc: true, quality: true, status: 'Open', location: 'Online',
+    desc: 'Develops college-level reading, writing, and critical-thinking skills through expository and argumentative essays. Emphasis on the research process, source evaluation, and academic citation. Required of all degree-seeking students.',
+    prereq: '',
+    equiv: [
+      { code: 'ENGL 1A', name: 'Reading & Composition', inst: 'USC', cid: 'ENGL 100', units: '4.0' },
+      { code: 'ENGL 100', name: 'College Writing', inst: 'UC San Diego', cid: 'ENGL 100', units: '3.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '43391', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'Danish Khan', seats: '28', price: '$172.00', notes: 'Fully online class with no set meeting times. All coursework is completed through Canvas. Students should expect to complete a minimum number of online work hours per week as outlined in the syllabus.' },
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '43412', format: 'Online - Synchronous', ztc: false, status: 'Open', time: 'Tue/Thu 10:00–11:50am', prof: 'M. Alvarez', seats: '12', price: '$172.00', notes: 'Live online sessions held over Zoom at the scheduled meeting times.' },
+    ],
+  },
+  'ENGL 105': {
+    code: 'ENGL 105', name: 'Critical Reading & Writing', inst: 'USC', units: '4.0', grade: 'C',
+    cid: 'ENGL 105', tuition: '$184.00', ztc: true, quality: true, status: 'Open', location: 'Online',
+    desc: 'Builds on first-year composition with advanced critical reading, rhetorical analysis, and argument. Students write extended researched essays and engage with a range of academic and public texts.',
+    prereq: 'ENGL 101 — College Composition (or equivalent)',
+    equiv: [
+      { code: 'ENGL 101', name: 'College Composition', inst: 'UCLA', cid: 'ENGL 100', units: '4.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '51022', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'R. Okafor', seats: '9', price: '$184.00', notes: 'Asynchronous online. Weekly discussion posts and four major writing assignments.' },
+    ],
+  },
+  'PSYC 101': {
+    code: 'PSYC 101', name: 'Introduction to Psychology', inst: 'UCLA', units: '4.0', grade: 'C',
+    cid: 'PSY 110', tuition: '$172.00', ztc: true, quality: true, status: 'Open', location: 'Online',
+    desc: 'Survey of the scientific study of behavior and mental processes: research methods, biological bases of behavior, sensation and perception, learning, memory, development, personality, and psychological disorders.',
+    prereq: '',
+    equiv: [
+      { code: 'PSYC 100', name: 'General Psychology', inst: 'USC', cid: 'PSY 110', units: '4.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '60188', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'S. Nguyen', seats: '34', price: '$172.00', notes: 'Fully online. Proctored midterm and final via the campus online proctoring service.' },
+    ],
+  },
+  'PSYC 100': {
+    code: 'PSYC 100', name: 'General Psychology', inst: 'USC', units: '4.0', grade: 'C',
+    cid: 'PSY 110', tuition: '$184.00', ztc: false, quality: true, status: 'Open', location: 'Online',
+    desc: 'Introductory survey of psychology as a science, covering the major areas of the discipline from biological foundations through social behavior.',
+    prereq: '',
+    equiv: [
+      { code: 'PSYC 101', name: 'Introduction to Psychology', inst: 'UCLA', cid: 'PSY 110', units: '4.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '60204', format: 'Online - Synchronous', ztc: false, status: 'Open', time: 'Mon/Wed 1:00–2:50pm', prof: 'D. Park', seats: '7', price: '$184.00', notes: 'Live online lecture with weekly section meetings.' },
+    ],
+  },
+  'MATH 110': {
+    code: 'MATH 110', name: 'College Algebra', inst: 'UC San Diego', units: '3.0', grade: 'C',
+    cid: 'MATH 150', tuition: '$158.00', ztc: true, quality: true, status: 'Open', location: 'Online',
+    desc: 'Functions and graphs, linear and quadratic equations, polynomial and rational functions, exponential and logarithmic functions, systems of equations. Satisfies the quantitative-reasoning requirement.',
+    prereq: 'Intermediate Algebra (or placement)',
+    equiv: [
+      { code: 'MATH 1', name: 'College Algebra', inst: 'USC', cid: 'MATH 150', units: '3.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '70511', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'L. Mehta', seats: '21', price: '$158.00', notes: 'Asynchronous. Homework delivered through an online math platform; two proctored exams.' },
+    ],
+  },
+  'STAT 120': {
+    code: 'STAT 120', name: 'Intro to Statistics', inst: 'UC San Diego', units: '3.0', grade: 'C',
+    cid: 'MATH 110', tuition: '$158.00', ztc: true, quality: true, status: 'Open', location: 'Online',
+    desc: 'Descriptive statistics, probability, sampling distributions, estimation, hypothesis testing, correlation, and regression. Satisfies the quantitative-reasoning requirement.',
+    prereq: '',
+    equiv: [],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '70620', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'A. Romero', seats: '16', price: '$158.00', notes: 'Asynchronous online. Uses an open-source statistics text (zero textbook cost).' },
+    ],
+  },
+};
+
+/* Persisted enrollment state (prototype): a set of enrolled course codes,
+   so the pathway and course-detail pages agree on what's enrolled. */
+function getEnrolled() {
+  try { return JSON.parse(sessionStorage.getItem('cvc_enrolled') || '[]'); }
+  catch (e) { return []; }
+}
+function setEnrolledList(arr) {
+  sessionStorage.setItem('cvc_enrolled', JSON.stringify(arr));
+}
+function isEnrolled(code) { return getEnrolled().indexOf(code) !== -1; }
+function enrollCourse(code) {
+  const a = getEnrolled();
+  if (a.indexOf(code) === -1) { a.push(code); setEnrolledList(a); }
+}
+function unenrollCourse(code) {
+  setEnrolledList(getEnrolled().filter(function (c) { return c !== code; }));
+}
+/* Escape helper for building HTML from data. */
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
 /* ---- Dashboard V2 tabs (current / past courses) ---- */
 function initTabs() {
   document.querySelectorAll('.tabbar').forEach(bar => {
