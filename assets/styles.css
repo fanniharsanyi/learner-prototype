@@ -976,9 +976,12 @@ body.joined .only-joined-i { display: inline-flex; }
 .ccard-more__panel { margin-top: 12px; }
 .ccard-more__panel[hidden] { display: none; }
 
-/* Program detail — enrolled-courses indicator + grand-total card */
-.enrolled-indicator { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid #BFE6CD; color: var(--green-700); font-weight: 600; font-size: 13px; border-radius: 999px; padding: 6px 14px; }
-.enrolled-indicator svg { width: 16px; height: 16px; }
+/* Program detail — per-requirement enrolled course + grand-total card */
+.req-card__enrolled { display: flex; align-items: center; gap: 7px; margin: 12px 0 0; font-size: 13px; font-weight: 600; color: var(--green-700); }
+.req-card__enrolled svg { width: 15px; height: 15px; flex: none; }
+.req-card__enrolled b { font-weight: 700; }
+.req-card__enrolled .ec-inst { color: var(--gray-600); font-weight: 500; }
+.req-card__none { margin: 12px 0 0; font-size: 13px; color: var(--gray-500); }
 .req-total { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #fff; border: 1px solid var(--gray-300); border-radius: var(--radius-card); padding: 16px 20px; margin-top: 16px; max-width: 360px; }
 .req-total__k { font-size: 13px; font-weight: 600; color: var(--c-text); }
 .req-total__v { font-size: 20px; font-weight: 700; color: var(--c-ink); }
