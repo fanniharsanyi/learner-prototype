@@ -952,6 +952,10 @@ body.joined .only-joined-i { display: inline-flex; }
 .ccard__price small { display: block; font-size: 10px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .04em; }
 .ccard__cue { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--c-primary); white-space: nowrap; pointer-events: none; }
 .ccard__cue svg { width: 16px; height: 16px; }
+/* Deliberate secondary action on an enrolled card (raised above the overlay) */
+.ccard__drop { position: relative; z-index: 2; background: none; border: 0; padding: 0; margin-top: -2px; font: inherit; font-size: 12px; font-weight: 600; color: #cf1f24; cursor: pointer; }
+.ccard__drop:hover { text-decoration: underline; }
+.ccard__drop:focus-visible { outline: var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
 /* Full-card primary action: an overlay button. Title + equivalencies (z-index 2)
    stay separately clickable/focusable — no nested interactive elements. */
 .ccard__hit { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer; z-index: 1; }
