@@ -132,7 +132,8 @@ function equivBtn(c) {
   return '<button type="button" class="lab-equiv zlink" onclick="labEquiv(\'' + c.code + '\')">' + EQ + n + ' equivalent course' + (n === 1 ? '' : 's') + '</button>';
 }
 function aria(c, enrolled) {
-  return (enrolled ? 'View your enrollment in ' : 'Add ') + c.code + ' — ' + c.name + (enrolled ? '' : ' to this requirement');
+  return (enrolled ? 'View your enrollment in ' + c.code + ' — ' + c.name
+                   : 'Enroll in ' + c.code + ' — ' + c.name + ' through the CVC Exchange');
 }
 function act() { toastNow('Prototype — enroll / view enrollment happens here'); }
 
@@ -149,7 +150,7 @@ function v1(code, enrolled) {
     '<div class="v1__aside">' +
       (enrolled ? '<span class="lab-pill-enrolled">' + CHECK + ' Enrolled</span>' : '<span class="lab-open">Open</span>') +
       '<span class="v1__price"><small>Tuition</small>' + esc(c.tuition) + '</span>' +
-      '<span class="v1__cue">' + (enrolled ? 'View enrollment ' + ARROW : PLUS + ' Add to requirement') + '</span>' +
+      '<span class="v1__cue">' + (enrolled ? 'View enrollment ' + ARROW : 'Enroll ' + ARROW) + '</span>' +
     '</div>' +
     '<button class="hit" aria-label="' + esc(aria(c, enrolled)) + '" onclick="act()"></button>' +
   '</article>';
@@ -165,7 +166,7 @@ function v2(code, enrolled) {
       '<a class="v2__title zlink" href="course-detail.html?code=' + encodeURIComponent(code) + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
       '<div class="v2__meta">' + esc(c.units) + ' units <span>·</span> Min grade ' + esc(c.grade) + ' <span>·</span> C-ID ' + esc(c.cid) + ' <span>·</span> ' + equivBtn(c) + '</div>' +
       '<div class="v2__chips">' + chips(c) + '</div>' +
-      '<div class="v2__hint">' + (enrolled ? CHECK_INLINE() + ' Enrolled — this is your pick' : 'Select this course') + '</div>' +
+      '<div class="v2__hint">' + (enrolled ? CHECK_INLINE() + ' Enrolled — this is your pick' : 'Select to enroll') + '</div>' +
     '</div>' +
     '<div class="v2__aside"><span class="v2__price"><small>Tuition</small>' + esc(c.tuition) + '</span></div>' +
     '<button class="hit" aria-label="' + esc(aria(c, enrolled)) + '" onclick="act()"></button>' +
@@ -191,7 +192,7 @@ function v3(code, enrolled) {
     '</div>' +
     '<div class="v3__bar">' +
       '<span class="v3__price"><small>Tuition </small>' + esc(c.tuition) + '</span>' +
-      '<span class="v3__cue">' + (enrolled ? 'View enrollment ' + ARROW : PLUS + ' Add to requirement') + '</span>' +
+      '<span class="v3__cue">' + (enrolled ? 'View enrollment ' + ARROW : 'Enroll ' + ARROW) + '</span>' +
     '</div>' +
     '<button class="hit" aria-label="' + esc(aria(c, enrolled)) + '" onclick="act()"></button>' +
   '</article>';
@@ -202,7 +203,7 @@ function variantBlock(n, title, desc, fn) {
     '<h2>Idea ' + n + ' — ' + esc(title) + '</h2>' +
     '<p>' + esc(desc) + '</p>' +
     '<div class="lab-comp">' +
-      '<div class="lab-comp__head"><span class="lab-comp__name">Required Core</span><span class="tag">Component</span></div>' +
+      '<div class="lab-comp__head"><span class="lab-comp__name">Required Core</span></div>' +
       '<div class="lab-comp__rule">Pick 1 course · Min grade C</div>' +
       '<div class="lab-cards">' + fn('ENGL 101', true) + fn('ENGL 105', false) + '</div>' +
     '</div>' +
