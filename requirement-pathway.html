@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirement pathway · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=33">
+<link rel="stylesheet" href="assets/styles.css?v=34">
 </head>
 <body>
 <main>
@@ -31,7 +31,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=33"></script>
+<script src="assets/app.js?v=34"></script>
 <script>
 mountStudentChrome('collaboratives');
 
@@ -40,49 +40,35 @@ mountStudentChrome('collaboratives');
 // (all = AND, any = OR) and one or more components, each holding the
 // approved courses that fulfill it.
 const REQSTRUCT = {
-  'Business Core: Introduction': {
-    desc: 'Foundational courses covering health sciences principles and academic readiness.',
+  'English Composition': {
+    desc: 'Complete one approved English composition course.',
     combine: 'all', home: false,
     components: [
       { name: 'Required Core', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'BUS 101', name: 'Introduction to Business', inst: 'De Anza College', units: 3, grade: 'C' },
-        { code: 'BUS 110', name: 'Foundations of Business', inst: 'Foothill College', units: 3, grade: 'C' },
-      ]},
-      { name: 'Academic Readiness', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'GS 100', name: 'College Success', inst: 'De Anza College', units: 3, grade: 'C' },
+        { code: 'ENGL 101', name: 'College Composition', inst: 'UCLA', units: 4, grade: 'C' },
+        { code: 'ENGL 105', name: 'Critical Reading & Writing', inst: 'USC', units: 4, grade: 'C' },
       ]},
     ],
   },
-  'Accounting Fundamentals': {
-    desc: 'Foundational courses covering business principles, ethics, and organizational structure.',
+  'Introduction to Psychology': {
+    desc: 'Complete one approved introductory psychology course.',
     combine: 'all', home: false,
     components: [
-      { name: 'Financial Accounting', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'ACCT 101', name: 'Financial Accounting', inst: 'Sonoma State University', units: 4, grade: 'C' },
-      ]},
-      { name: 'Managerial Accounting', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'ACCT 102', name: 'Managerial Accounting', inst: 'UC San Francisco', units: 4, grade: 'C' },
-      ]},
-    ],
-  },
-  'General Education: English': {
-    desc: 'Foundational courses covering reading, writing, and critical analysis.',
-    combine: 'all', home: true,
-    components: [
-      { name: 'Composition', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'ENGL 101', name: 'College Composition', inst: 'Pasadena City College', units: 4, grade: 'C' },
+      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', courses: [
+        { code: 'PSYC 101', name: 'Introduction to Psychology', inst: 'UCLA', units: 4, grade: 'C' },
+        { code: 'PSYC 100', name: 'General Psychology', inst: 'USC', units: 4, grade: 'C' },
       ]},
     ],
   },
   'General Education: Mathematics': {
-    desc: 'Foundational quantitative reasoning courses required for the pathway.',
+    desc: 'Complete one approved college-level mathematics course.',
     combine: 'any', home: true,
     components: [
       { name: 'College Algebra path', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'MATH 110', name: 'College Algebra', inst: 'Pasadena City College', units: 4, grade: 'C' },
+        { code: 'MATH 110', name: 'College Algebra', inst: 'UC San Diego', units: 3, grade: 'C' },
       ]},
       { name: 'Statistics path', rule: 'Pick 1 course · Min grade C', courses: [
-        { code: 'STAT 120', name: 'Intro to Statistics', inst: 'Pasadena City College', units: 4, grade: 'C' },
+        { code: 'STAT 120', name: 'Intro to Statistics', inst: 'UC San Diego', units: 3, grade: 'C' },
       ]},
     ],
   },
@@ -110,8 +96,8 @@ function componentCard(comp) {
 }
 
 (function render() {
-  const name = new URLSearchParams(location.search).get('req') || 'Business Core: Introduction';
-  const r = REQSTRUCT[name] || REQSTRUCT['Business Core: Introduction'];
+  const name = new URLSearchParams(location.search).get('req') || 'English Composition';
+  const r = REQSTRUCT[name] || REQSTRUCT['English Composition'];
   document.title = name + ' · CVC Exchange';
 
   // tags
@@ -133,7 +119,7 @@ function componentCard(comp) {
   if (r.home) {
     const home = document.getElementById('rqHome');
     home.hidden = false;
-    home.innerHTML = HOME_SVG + ' These courses must be taken at your home college (Pasadena City College).';
+    home.innerHTML = HOME_SVG + ' These courses must be taken at your home college (UC San Diego).';
   }
 
   // components, joined by AND (all) or OR (any) connectors

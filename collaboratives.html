@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regional Collaboratives · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=33">
+<link rel="stylesheet" href="assets/styles.css?v=34">
 </head>
 <body>
 <main>
@@ -16,7 +16,7 @@
     <div id="emptyState" class="collab-empty hide">
       <div class="collab-empty__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
       <h2>No collaboratives available yet</h2>
-      <p>Your home college, <b>Pasadena City College</b>, isn't currently participating in any shared program pathways through CVC. You can still browse and search the full course catalog.</p>
+      <p>Your home college, <b>UC San Diego</b>, isn't currently participating in any shared program pathways through CVC. You can still browse and search the full course catalog.</p>
       <div class="collab-empty__actions">
         <button class="btn btn--primary" onclick="toastNow('Opens the CVC course search')">Search for courses</button>
         <a class="btn btn--outline" href="collaboratives.html">Back to all collaboratives</a>
@@ -29,11 +29,10 @@
           <label for="home-inst">Home institution</label>
           <select id="home-inst">
             <option value="">All institutions</option>
-            <option>Pasadena City College</option>
+            <option>UC San Diego</option>
             <option>UCLA</option>
             <option>USC</option>
-            <option>UC San Francisco</option>
-            <option>Touro University</option>
+            <option>Cal State Long Beach</option>
           </select>
         </div>
         <button type="submit" class="btn btn--outline">Filter</button>
@@ -100,7 +99,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=33"></script>
+<script src="assets/app.js?v=34"></script>
 <script>
 mountStudentChrome('collaboratives');
 if (new URLSearchParams(location.search).get('state') === 'empty') {

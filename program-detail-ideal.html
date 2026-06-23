@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registered Nursing (RN) · Your path · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=33">
+<link rel="stylesheet" href="assets/styles.css?v=34">
 <style>
   /* ============================================================
      Program detail V2 (concept) — "pathway spine".
@@ -199,7 +199,7 @@
       <div class="getstarted__body">
         <h3>Join this pathway to get started</h3>
         <p>Opt in to become a Collaborative student. Once you join, you'll see your progress and can add courses to each requirement below.</p>
-        <p class="getstarted__meta">This pathway: <b>3 requirements</b> · <b>18 units</b> · In person &amp; online</p>
+        <p class="getstarted__meta">This pathway: <b>3 requirements</b> · <b>11 units</b> · In person &amp; online</p>
       </div>
       <button class="btn" onclick="joinPathway()">Get started</button>
     </div>
@@ -214,11 +214,11 @@
       <section class="pw-progress" aria-label="Your progress in this pathway">
         <div class="pw-progress__top">
           <h2 class="v2-h2">Your pathway progress</h2>
-          <div class="pw-progress__count"><b>1 of 3</b> requirements complete · <b>9 of 18</b> units earned</div>
+          <div class="pw-progress__count"><b>1 of 3</b> requirements complete · <b>4 of 11</b> units earned</div>
         </div>
-        <div class="pw-bar" role="img" aria-label="38 percent complete">
-          <i class="pw-bar__done" style="width:33%"></i>
-          <i class="pw-bar__prog" style="width:14%"></i>
+        <div class="pw-bar" role="img" aria-label="36 percent complete">
+          <i class="pw-bar__done" style="width:36%"></i>
+          <i class="pw-bar__prog" style="width:36%"></i>
         </div>
         <div class="pw-legend">
           <span class="l-done">Complete</span>
@@ -238,19 +238,25 @@
       </div>
 
       <div class="spine">
-        <!-- NODE 1 — done -->
+        <!-- NODE 1 — done — English Composition -->
         <div class="node node--done">
           <span class="node__bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-courses.html?req=' + encodeURIComponent('Business Core: Introduction'))">
+          <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-pathway.html?req=' + encodeURIComponent('English Composition'))">
             <div class="pw-card__top">
               <div class="pw-card__main">
                 <div class="pw-flags">
                   <span class="pw-flag pw-flag--done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Complete</span>
                   <span class="pw-flag pw-flag--req">Required</span>
                 </div>
-                <div class="pw-card__title">Business Core: Introduction</div>
-                <div class="pw-card__desc">Foundational courses covering health sciences principles and academic readiness.</div>
-                <div class="pw-card__foot"><span class="pw-prog"><span class="mini"><i style="width:100%"></i></span> 6 of 6 courses complete</span></div>
+                <div class="pw-card__title">English Composition</div>
+                <div class="pw-card__desc">Complete one approved English composition course.</div>
+                <div class="enrolled-wrap">
+                  <div class="enrolled-lab">Completed at</div>
+                  <div class="enrolled-chip">
+                    <span class="enrolled-chip__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+                    <div><b>ENGL 101 — College Composition</b><span><em>UCLA</em> · 4 units · min. grade C</span></div>
+                  </div>
+                </div>
               </div>
               <svg class="pw-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
             </div>
@@ -259,31 +265,53 @@
 
         <div class="and-rail"><span>AND</span></div>
 
-        <!-- NODE 2 — choose-one branch, in progress -->
+        <!-- NODE 2 — in progress — Introduction to Psychology -->
         <div class="node node--prog">
           <span class="node__bullet" aria-label="in progress"></span>
+          <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-pathway.html?req=' + encodeURIComponent('Introduction to Psychology'))">
+            <div class="pw-card__top">
+              <div class="pw-card__main">
+                <div class="pw-flags">
+                  <span class="pw-flag pw-flag--req">Required</span>
+                </div>
+                <div class="pw-card__title">Introduction to Psychology</div>
+                <div class="pw-card__desc">Complete one approved introductory psychology course.</div>
+                <div class="enrolled-wrap">
+                  <div class="enrolled-lab">You're enrolled in</div>
+                  <div class="enrolled-chip">
+                    <span class="enrolled-chip__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+                    <div><b>PSYC 101 — Introduction to Psychology</b><span><em>UCLA</em> · 4 units · min. grade C</span></div>
+                  </div>
+                </div>
+              </div>
+              <svg class="pw-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="and-rail"><span>AND</span></div>
+
+        <!-- NODE 3 — required, home-only, choose-one between component paths — General Education: Mathematics -->
+        <div class="node node--todo">
+          <span class="node__bullet"><i></i></span>
           <div class="branch">
             <div class="branch__head">
-              <span class="pw-flag pw-flag--choose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Choose one</span>
               <span class="pw-flag pw-flag--req">Required</span>
+              <span class="pw-flag pw-flag--home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg> Home institution only</span>
+              <span class="pw-flag pw-flag--choose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Choose one</span>
             </div>
-            <p class="branch__note">Complete <b>one</b> of the two options below — either one satisfies this part of your pathway.</p>
+            <div class="pw-card__title" style="margin:6px 0 2px;">General Education: Mathematics</div>
+            <p class="branch__note">Complete <b>one</b> of the two paths below at your home college (UC San Diego) — either one satisfies this requirement.</p>
 
             <div class="opts">
               <div class="opt">
                 <span class="opt__num">1</span>
-                <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-courses.html?req=' + encodeURIComponent('Accounting Fundamentals'))">
+                <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-pathway.html?req=' + encodeURIComponent('General Education: Mathematics'))">
                   <div class="pw-card__top">
                     <div class="pw-card__main">
-                      <div class="pw-card__title">Accounting Fundamentals</div>
-                      <div class="pw-card__desc">Foundational courses covering business principles, ethics, and organizational structure.</div>
-                      <div class="enrolled-wrap">
-                        <div class="enrolled-lab">You're enrolled in</div>
-                        <div class="enrolled-chip">
-                          <span class="enrolled-chip__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
-                          <div><b>MATH 101 — Calculus 1</b><span><em>Foothill College</em> · 3 units · min. grade C</span></div>
-                        </div>
-                      </div>
+                      <div class="pw-card__title">College Algebra path</div>
+                      <div class="pw-card__desc">MATH 110 — College Algebra · UC San Diego · 3 units · min. grade C</div>
+                      <div class="pw-card__foot"><span class="pw-prog"><span class="mini"><i style="width:0%"></i></span> Not started</span></div>
                     </div>
                     <svg class="pw-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
                   </div>
@@ -294,13 +322,12 @@
 
               <div class="opt">
                 <span class="opt__num">2</span>
-                <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-courses.html?req=' + encodeURIComponent('General Education: English'))">
+                <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-pathway.html?req=' + encodeURIComponent('General Education: Mathematics'))">
                   <div class="pw-card__top">
                     <div class="pw-card__main">
-                      <div class="pw-flags"><span class="pw-flag pw-flag--home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg> Home institution only</span></div>
-                      <div class="pw-card__title">General Education: English</div>
-                      <div class="pw-card__desc">Foundational courses covering reading, writing, and critical analysis.</div>
-                      <div class="pw-card__foot"><span class="pw-prog"><span class="mini g"><i style="width:0%"></i></span> 0 of 6 courses · not started</span></div>
+                      <div class="pw-card__title">Statistics path</div>
+                      <div class="pw-card__desc">STAT 120 — Intro to Statistics · UC San Diego · 3 units · min. grade C</div>
+                      <div class="pw-card__foot"><span class="pw-prog"><span class="mini g"><i style="width:0%"></i></span> Not started</span></div>
                     </div>
                     <svg class="pw-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
                   </div>
@@ -309,32 +336,11 @@
             </div>
           </div>
         </div>
-
-        <div class="and-rail"><span>AND</span></div>
-
-        <!-- NODE 3 — required, not started -->
-        <div class="node node--todo">
-          <span class="node__bullet"><i></i></span>
-          <div class="pw-card" role="button" tabindex="0" onclick="go('requirement-courses.html?req=' + encodeURIComponent('General Education: Mathematics'))">
-            <div class="pw-card__top">
-              <div class="pw-card__main">
-                <div class="pw-flags">
-                  <span class="pw-flag pw-flag--req">Required</span>
-                  <span class="pw-flag pw-flag--home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg> Home institution only</span>
-                </div>
-                <div class="pw-card__title">General Education: Mathematics</div>
-                <div class="pw-card__desc">Foundational quantitative reasoning courses required for the pathway.</div>
-                <div class="pw-card__foot"><span class="pw-prog"><span class="mini"><i style="width:0%"></i></span> 0 of 6 courses · not started</span></div>
-              </div>
-              <svg class="pw-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=33"></script>
+<script src="assets/app.js?v=34"></script>
 <script>
 mountStudentChrome('collaboratives');
 document.querySelectorAll('.pw-card[role="button"]').forEach(function (c) {
