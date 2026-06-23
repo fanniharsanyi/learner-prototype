@@ -936,7 +936,7 @@ body.joined .only-joined-i { display: inline-flex; }
 .ccard:hover { border-color: var(--c-primary); box-shadow: 0 6px 18px rgba(25,83,168,.10); }
 .ccard__main { flex: 1 1 auto; min-width: 0; }
 .ccard__inst { font-size: 12px; font-weight: 600; color: var(--gray-600); }
-.ccard__title { position: relative; z-index: 2; display: inline-block; font-size: 18px; font-weight: 700; color: var(--c-ink); text-decoration: none; margin: 3px 0 0; }
+.ccard__title { position: relative; z-index: 2; display: inline-block; font-size: 16px; font-weight: 700; color: var(--c-ink); text-decoration: none; margin: 3px 0 0; }
 .ccard__title:hover { color: var(--c-primary); text-decoration: underline; }
 .ccard__title:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 .ccard__meta { font-size: 13px; color: var(--gray-600); margin-top: 7px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }

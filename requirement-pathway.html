@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirement pathway · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=38">
+<link rel="stylesheet" href="assets/styles.css?v=39">
 </head>
 <body>
 <main>
@@ -28,7 +28,7 @@
     <p class="rq-cta__note" style="margin-top:20px;">Enrolling is done through the CVC Exchange — no separate application to the teaching college.</p>
   </div>
 </main>
-<script src="assets/app.js?v=38"></script>
+<script src="assets/app.js?v=39"></script>
 <script>
 mountStudentChrome('collaboratives');
 
@@ -79,7 +79,7 @@ function courseCard(code, reqName) {
   const detailHref = 'course-detail.html?req=' + encodeURIComponent(reqName) + '&code=' + encodeURIComponent(code);
   const action = enrolled
     ? 'View your enrollment in ' + c.code + ' — ' + c.name
-    : 'Enroll in ' + c.code + ' — ' + c.name + ' through the CVC Exchange';
+    : 'View ' + c.code + ' — ' + c.name + ' course details and sections to enroll';
   const equiv = eqCount
     ? '<button type="button" class="crf-equiv" data-equiv="' + esc(code) + '">' + EQ_SVG + '<span>' + eqCount + ' equivalent course' + (eqCount === 1 ? '' : 's') + '</span></button>'
     : '<span class="ccard__meta-muted">No equivalents</span>';
@@ -100,17 +100,22 @@ function courseCard(code, reqName) {
         ? '<span class="pill pill--done">' + CHECK_SVG + ' Enrolled</span>'
         : '<span class="ccard__open">' + esc(c.status) + '</span>') +
       '<span class="ccard__price"><small>Tuition</small>' + esc(c.tuition) + '</span>' +
-      '<span class="ccard__cue">' + (enrolled ? 'View enrollment ' : 'Enroll ') + ARROW_SVG + '</span>' +
+      '<span class="ccard__cue">' + (enrolled ? 'View enrollment ' : 'View course ') + ARROW_SVG + '</span>' +
       (enrolled ? '<button type="button" class="ccard__drop" data-drop="' + esc(code) + '">Drop course</button>' : '') +
     '</div>' +
-    '<button type="button" class="ccard__hit" data-enroll="' + esc(code) + '" aria-label="' + esc(action) + '"></button>' +
+    '<a class="ccard__hit" href="' + detailHref + '" aria-label="' + esc(action) + '"></a>' +
   '</article>';
 }
 
 /* Render one component: all cards, or (once a course is picked) just the
    selected card plus an accordion of the others. */
 function paintComponent(host, comp, ci) {
-  const selected = comp.codes.filter(isEnrolled)[0] || null;
+  // Pick-1: the selected course is whatever the student enrolled in (on the
+  // course-detail page). If somehow more than one in this component is enrolled,
+  // keep the most recent and drop the rest.
+  const enrolledInComp = comp.codes.filter(isEnrolled);
+  const selected = enrolledInComp.length ? enrolledInComp[enrolledInComp.length - 1] : null;
+  enrolledInComp.forEach(function (c) { if (c !== selected) unenrollCourse(c); });
   const others = comp.codes.filter(function (c) { return c !== selected; });
   let html =
     '<div class="comp__head"><span class="comp__name">' + esc(comp.name) + '</span></div>' +
@@ -139,21 +144,8 @@ function paintComponent(host, comp, ci) {
 }
 
 function wireComponent(host, comp, ci) {
-  // Enroll / view via the full-card overlay button.
-  host.querySelectorAll('.ccard__hit').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      const code = btn.dataset.enroll;
-      if (isEnrolled(code)) {
-        toastNow('Opens your enrollment in ' + code);
-        return;
-      }
-      // Pick-1: enrolling a course replaces any other pick in this component.
-      comp.codes.forEach(function (c) { if (c !== code) unenrollCourse(c); });
-      enrollCourse(code);
-      paintComponent(host, comp, ci);
-      toastNow(code + ' added to this requirement');
-    });
-  });
+  // The full-card overlay is a plain link to the course-detail page — enrolling
+  // happens there, not on this card. No click handler needed for it.
   // Drop / unenroll (deliberate secondary action, raised above the card overlay).
   host.querySelectorAll('.ccard__drop').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
