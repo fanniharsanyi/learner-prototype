@@ -7,11 +7,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 :root {
-  --c-primary: #1953A8;
-  --c-primary-hover: #154892;
-  --c-primary-active: #103A76;
-  --c-link: #1953A8;
-  --c-ink: #10356B;
+  --c-primary: #6B21A8;
+  --c-primary-hover: #581C87;
+  --c-primary-active: #3B0764;
+  --c-link: #6B21A8;
+  --c-ink: #3B0764;
   --c-text: #333333;
   --c-gold: #FFB000;
   --c-gold-hover: #E69E00;
@@ -30,11 +30,11 @@
   --amber-bg: #FFFBF0;
   --amber-border: #F0D58A;
   --amber-700: #B45309;
-  --blue-50: #EFF5FD;
+  --blue-50: #F5F3FF;
 
   --radius-field: 6px;
   --radius-card: 10px;
-  --focus-ring: 2px solid #4279B6;
+  --focus-ring: 2px solid #9333EA;
   --page-max: 1264px;
 }
 
