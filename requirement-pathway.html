@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirement pathway · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=39">
+<link rel="stylesheet" href="assets/styles.css?v=40">
 </head>
 <body>
 <main>
@@ -28,7 +28,7 @@
     <p class="rq-cta__note" style="margin-top:20px;">Enrolling is done through the CVC Exchange — no separate application to the teaching college.</p>
   </div>
 </main>
-<script src="assets/app.js?v=39"></script>
+<script src="assets/app.js?v=40"></script>
 <script>
 mountStudentChrome('collaboratives');
 
@@ -37,26 +37,27 @@ mountStudentChrome('collaboratives');
    more components, each holding the approved courses (by code) that fulfill it.
    Full course data lives in COURSE_CATALOG (assets/app.js). */
 const REQSTRUCT = {
-  'English Composition': {
-    desc: 'Complete one approved English composition course.',
+  'Lower-division core': {
+    desc: 'Complete the lower-division core — a composition course and an anatomy course.',
     combine: 'all', home: false,
     components: [
-      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', codes: ['ENGL 101', 'ENGL 105'] },
+      { name: 'College Composition', rule: 'Pick 1 course · Min grade C', codes: ['ENGL 101', 'ENGL 105'] },
+      { name: 'Human Anatomy', rule: 'Pick 1 course · Min grade C', codes: ['BIOL 6A'] },
     ],
   },
-  'Introduction to Psychology': {
-    desc: 'Complete one approved introductory psychology course.',
+  'Quantitative or behavioral': {
+    desc: 'Complete one quantitative or behavioral course.',
+    combine: 'any', home: false,
+    components: [
+      { name: 'Introduction to Psychology', rule: 'Pick 1 course · Min grade C', codes: ['PSYC 101', 'PSYC 100'] },
+      { name: 'College Algebra', rule: 'Pick 1 course · Min grade C', codes: ['MATH 110'] },
+    ],
+  },
+  'Allied-health foundations': {
+    desc: 'Complete the allied-health foundation course.',
     combine: 'all', home: false,
     components: [
-      { name: 'Required Core', rule: 'Pick 1 course · Min grade C', codes: ['PSYC 101', 'PSYC 100'] },
-    ],
-  },
-  'General Education: Mathematics': {
-    desc: 'Complete one approved college-level mathematics course.',
-    combine: 'any', home: true,
-    components: [
-      { name: 'College Algebra path', rule: 'Pick 1 course · Min grade C', codes: ['MATH 110'] },
-      { name: 'Statistics path', rule: 'Pick 1 course · Min grade C', codes: ['STAT 120'] },
+      { name: 'Medical Terminology', rule: 'Pick 1 course · Min grade C', codes: ['HLTH 50'] },
     ],
   },
 };
@@ -66,8 +67,8 @@ const CHECK_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" s
 const EQ_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>';
 const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
-const reqName = new URLSearchParams(location.search).get('req') || 'English Composition';
-const req = REQSTRUCT[reqName] || REQSTRUCT['English Composition'];
+const reqName = new URLSearchParams(location.search).get('req') || 'Lower-division core';
+const req = REQSTRUCT[reqName] || REQSTRUCT['Lower-division core'];
 document.title = reqName + ' · CVC Exchange';
 
 /* ---- A single merged course card (was requirement-courses + pathway) ---- */

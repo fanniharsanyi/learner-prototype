@@ -330,6 +330,30 @@ const COURSE_CATALOG = {
       { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '70620', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'A. Romero', seats: '16', price: '$158.00', notes: 'Asynchronous online. Uses an open-source statistics text (zero textbook cost).' },
     ],
   },
+  'BIOL 6A': {
+    code: 'BIOL 6A', name: 'Human Anatomy', inst: 'UCLA', units: '4.0', grade: 'C',
+    cid: 'BIOL 105', tuition: '$196.00', ztc: false, quality: true, status: 'Open', location: 'Hybrid',
+    desc: 'Structure of the human body across the major organ systems, with a laboratory component covering anatomical models, histology, and dissection. Required for clinical and allied-health programs.',
+    prereq: '',
+    equiv: [
+      { code: 'BISC 240', name: 'Human Anatomy', inst: 'USC', cid: 'BIOL 105', units: '4.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '80155', format: 'Hybrid', ztc: false, status: 'Open', time: 'Lab Fri 9:00–11:50am', prof: 'H. Okonkwo', seats: '18', price: '$196.00', notes: 'Lecture online; required in-person lab on Fridays.' },
+    ],
+  },
+  'HLTH 50': {
+    code: 'HLTH 50', name: 'Medical Terminology', inst: 'USC', units: '3.0', grade: 'C',
+    cid: 'HLTH 50', tuition: '$158.00', ztc: true, quality: true, status: 'Open', location: 'Online',
+    desc: 'Systematic study of medical terms — roots, prefixes, and suffixes — used across nursing and allied-health fields. Builds the vocabulary needed for clinical coursework and patient records.',
+    prereq: '',
+    equiv: [
+      { code: 'ALDH 110', name: 'Medical Terminology', inst: 'Cal State Long Beach', cid: 'HLTH 50', units: '3.0' },
+    ],
+    sections: [
+      { term: 'Fall 2026 - Semester', dates: 'Aug 24 to Dec 21', crn: '80422', format: 'Online - Asynchronous', ztc: true, status: 'Open', time: 'TBA', prof: 'P. Salazar', seats: '25', price: '$158.00', notes: 'Fully online, zero textbook cost.' },
+    ],
+  },
 };
 
 /* Persisted enrollment state (prototype): a set of enrolled course codes,
