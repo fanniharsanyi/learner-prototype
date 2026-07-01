@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirement pathway · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=40">
+<link rel="stylesheet" href="assets/styles.css?v=41">
 </head>
 <body>
 <main>
@@ -28,11 +28,11 @@
     <p class="rq-cta__note" style="margin-top:20px;">Enrolling is done through the CVC Exchange — no separate application to the teaching college.</p>
   </div>
 </main>
-<script src="assets/app.js?v=40"></script>
+<script src="assets/app.js?v=41"></script>
 <script>
 mountStudentChrome('collaboratives');
 
-/* Requirement structures mirror the campus-admin "Define requirement details"
+/* Requirement structures mirror the collaborative contributor "Define requirement details"
    flow: each requirement has a combine rule (all = AND, any = OR) and one or
    more components, each holding the approved courses (by code) that fulfill it.
    Full course data lives in COURSE_CATALOG (assets/app.js). */
@@ -64,7 +64,6 @@ const REQSTRUCT = {
 
 const HOME_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l8-7 8 7M6 10v9h12v-9"/></svg>';
 const CHECK_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>';
-const EQ_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4M16 17l-4-4M16 17l-4 4"/></svg>';
 const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
 const reqName = new URLSearchParams(location.search).get('req') || 'Lower-division core';
@@ -76,14 +75,10 @@ function courseCard(code, reqName) {
   const c = COURSE_CATALOG[code];
   if (!c) return '';
   const enrolled = isEnrolled(code);
-  const eqCount = (c.equiv || []).length;
   const detailHref = 'course-detail.html?req=' + encodeURIComponent(reqName) + '&code=' + encodeURIComponent(code);
   const action = enrolled
     ? 'View your enrollment in ' + c.code + ' — ' + c.name
     : 'View ' + c.code + ' — ' + c.name + ' course details and sections to enroll';
-  const equiv = eqCount
-    ? '<button type="button" class="crf-equiv" data-equiv="' + esc(code) + '">' + EQ_SVG + '<span>' + eqCount + ' equivalent course' + (eqCount === 1 ? '' : 's') + '</span></button>'
-    : '<span class="ccard__meta-muted">No equivalents</span>';
   const chips =
     (c.quality ? '<span class="ccard__chip"><img class="cr-ic-q" src="assets/ic-quality.png" alt=""> Quality Reviewed</span>' : '') +
     (c.ztc ? '<span class="ccard__chip"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' : '');
@@ -93,7 +88,7 @@ function courseCard(code, reqName) {
       '<div class="ccard__inst">' + esc(c.inst) + '</div>' +
       '<a class="ccard__title" href="' + detailHref + '">' + esc(c.code) + ' — ' + esc(c.name) + '</a>' +
       '<div class="ccard__meta">' + esc(c.units) + ' units <span aria-hidden="true">·</span> Min grade ' + esc(c.grade) +
-        ' <span aria-hidden="true">·</span> C-ID ' + esc(c.cid) + ' <span aria-hidden="true">·</span> ' + equiv + '</div>' +
+        ' <span aria-hidden="true">·</span> C-ID ' + esc(c.cid) + '</div>' +
       '<div class="ccard__chips">' + chips + '</div>' +
     '</div>' +
     '<div class="ccard__aside">' +
@@ -167,37 +162,6 @@ function wireComponent(host, comp, ci) {
       if (panel) panel.hidden = open;
     });
   }
-  // Equivalency modal.
-  host.querySelectorAll('.crf-equiv').forEach(function (b) {
-    b.addEventListener('click', function () { openEquivModal(b.dataset.equiv); });
-  });
-}
-
-function openEquivModal(code) {
-  const c = COURSE_CATALOG[code]; if (!c) return;
-  const list = c.equiv || [];
-  const ov = document.createElement('div');
-  ov.className = 'modal-ov';
-  ov.innerHTML =
-    '<div class="modal" role="dialog" aria-modal="true" aria-label="Equivalent courses">' +
-      '<div class="modal__head"><h3>Courses equivalent to ' + esc(c.code) + ' — ' + esc(c.name) + '</h3>' +
-        '<button class="modal__x" data-x aria-label="Close">&times;</button></div>' +
-      '<div class="modal__body">' +
-        '<p class="equiv-lead">These courses are accepted as equivalent and count the same toward this requirement.</p>' +
-        (list.map(function (e) {
-          return '<div class="equiv-row"><div class="equiv-row__main">' +
-            '<div class="equiv-row__name">' + esc(e.code) + ' — ' + esc(e.name) + '</div>' +
-            '<div class="equiv-row__meta">' + esc(e.inst) + ' · ' + esc(e.units) + ' units · C-ID ' + esc(e.cid) + '</div>' +
-            '</div><span class="pill pill--done">Equivalent</span></div>';
-        }).join('') || '<p class="muted">No equivalent courses on record.</p>') +
-      '</div>' +
-    '</div>';
-  document.body.appendChild(ov);
-  requestAnimationFrame(function () { ov.classList.add('show'); });
-  const close = function () { ov.classList.remove('show'); setTimeout(function () { ov.remove(); }, 200); };
-  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
-  ov.querySelector('[data-x]').onclick = close;
-  document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
 }
 
 (function render() {
@@ -213,7 +177,7 @@ function openEquivModal(code) {
   document.getElementById('rqRule').innerHTML =
     'To fulfill this requirement, complete <b>' +
     (isAll ? 'all of the components' : 'any one of the components') +
-    '</b> below. This structure is set by the program administrator.';
+    '</b> below. This structure is set by the collaborative manager.';
 
   if (req.home) {
     const home = document.getElementById('rqHome');
