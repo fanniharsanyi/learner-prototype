@@ -969,9 +969,9 @@ body.joined .only-joined-i { display: inline-flex; }
 .ccard__hit:focus-visible { outline: var(--focus-ring); outline-offset: -3px; border-radius: 12px; }
 .crf-equiv { position: relative; z-index: 2; }
 /* Enrolled treatment: green left border + tint + pill */
-.ccard--enrolled { border-color: var(--green-600); border-left-width: 4px; background: var(--green-bg); }
+.ccard--enrolled { background: #fff; border-color: var(--gray-300); border-left: 4px solid var(--green-600); }
 .ccard--enrolled .ccard__cue { color: var(--green-700); }
-.ccard--enrolled:hover { border-color: var(--green-600); box-shadow: 0 6px 18px rgba(22,163,74,.12); }
+.ccard--enrolled:hover { border-color: var(--gray-300); border-left-color: var(--green-600); box-shadow: 0 6px 18px rgba(22,163,74,.12); }
 
 /* Pick-1 accordion ("Show other courses") */
 .ccard-more { margin-top: 12px; }
