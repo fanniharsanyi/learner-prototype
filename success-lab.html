@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enrolled-card success state — design ideas · CVC Exchange</title>
+<link rel="stylesheet" href="assets/styles.css?v=41">
+<style>
+/* ============================================================
+   SUCCESS-STATE LAB — the enrolled pathway card, shown in a few
+   treatments so we can dial back the green. Every variant reuses the
+   real .ccard / .ccard--enrolled styles and CVC tokens; each modifier
+   only changes the success cue (fill / border / where the green sits).
+   The live pathway card is NOT changed — this is for picking a direction.
+   ============================================================ */
+.sl-wrap { max-width: 900px; margin: 0 auto; padding: 8px 0 60px; }
+.sl-intro { background: var(--blue-50); border: 1px solid #CFE0F5; border-left: 4px solid var(--c-primary); border-radius: 10px; padding: 16px 18px; margin-bottom: 28px; font-size: 14px; color: var(--c-text); }
+.sl-intro b { color: var(--c-ink); }
+.sl-variant { margin: 0 0 34px; }
+.sl-variant__head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0 0 10px; }
+.sl-variant__tag { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--c-primary); }
+.sl-variant__name { font-size: 17px; font-weight: 700; color: var(--c-ink); }
+.sl-variant__note { font-size: 13px; color: var(--gray-700); }
+.sl-variant--current .sl-variant__tag { color: #cf1f24; }
+
+/* --- Variant modifiers: each overrides the live .ccard--enrolled cue --- */
+/* A · Left accent bar — white card, green left bar only (no fill) */
+.ccard--sv-bar.ccard--enrolled { background: #fff; border-color: var(--gray-300); border-left: 4px solid var(--green-600); }
+/* B · Green outline — white fill, the whole border goes green */
+.ccard--sv-outline.ccard--enrolled { background: #fff; border: 1.5px solid var(--green-600); }
+/* C · Faint tint — a much softer wash than the current #ECFAF0, + left bar */
+.ccard--sv-tint.ccard--enrolled { background: #F6FCF8; border-color: var(--gray-200); border-left: 4px solid var(--green-600); }
+/* D · Quiet — fully neutral card; the pill + green “View enrollment” cue carry it */
+.ccard--sv-quiet.ccard--enrolled { background: #fff; border-color: var(--gray-300); border-left-width: 1px; }
+/* E · Tinted status rail — body stays white, only the right aside gets green */
+.ccard--sv-rail.ccard--enrolled { background: #fff; border-color: var(--gray-300); border-left-width: 1px; overflow: hidden; }
+.ccard--sv-rail .ccard__aside { align-self: stretch; justify-content: center; background: var(--green-bg); margin: -18px -20px -18px 0; padding: 18px 20px; border-left: 3px solid var(--green-600); }
+</style>
+</head>
+<body>
+<main>
+  <div class="page sl-wrap">
+    <h1 class="h1" style="margin-bottom:6px;">Enrolled card — success-state options</h1>
+    <p class="rc-sub" style="margin:0 0 20px;">Same card, five treatments. Goal: keep “you’re enrolled” obvious while dialing back the green fill.</p>
+
+    <div class="sl-intro">
+      <b>Feedback:</b> the current full-green background reads as too much. Below, the same enrolled course card in lighter directions — from a green outline to an almost-neutral card that leans on the pill and the “View enrollment” cue. Pick one (or mix) and I’ll apply it to the live pathway card.
+    </div>
+
+    <div id="slList"></div>
+  </div>
+</main>
+<script src="assets/app.js?v=41"></script>
+<script>
+mountStudentChrome('collaboratives');
+
+const CHECK = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>';
+const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+/* One enrolled card, with an extra modifier class per variant. */
+function card(mod) {
+  return '<article class="ccard ccard--enrolled ' + mod + '">' +
+    '<div class="ccard__main">' +
+      '<div class="ccard__inst">Foothill College</div>' +
+      '<a class="ccard__title" href="#" onclick="return false">ENGL 101 — College Composition</a>' +
+      '<div class="ccard__meta">4 units <span aria-hidden="true">·</span> Min grade C <span aria-hidden="true">·</span> C-ID ENGL 100</div>' +
+      '<div class="ccard__chips">' +
+        '<span class="ccard__chip"><img class="cr-ic-q" src="assets/ic-quality.png" alt=""> Quality Reviewed</span>' +
+        '<span class="ccard__chip"><img class="cr-ic-z" src="assets/ic-ztc.png" alt=""> Zero Textbook Cost</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="ccard__aside">' +
+      '<span class="pill pill--done">' + CHECK + ' Enrolled</span>' +
+      '<span class="ccard__price"><small>Tuition</small>$46/unit</span>' +
+      '<span class="ccard__cue">View enrollment ' + ARROW + '</span>' +
+      '<button type="button" class="ccard__drop" onclick="return false">Drop course</button>' +
+    '</div>' +
+  '</article>';
+}
+
+const VARIANTS = [
+  { mod: '', tag: 'Current', name: 'Full green fill', note: 'What’s live today — green background across the whole card. This is the “too much” one, shown for reference.', current: true },
+  { mod: 'ccard--sv-bar', tag: 'A', name: 'Left accent bar', note: 'White card, a 4px green bar down the left edge. Quietest change; the bar + green pill do the work.' },
+  { mod: 'ccard--sv-outline', tag: 'B', name: 'Green outline', note: 'White fill, the whole border turns green. Frames the card as “done” without any wash.' },
+  { mod: 'ccard--sv-tint', tag: 'C', name: 'Faint tint', note: 'A much softer green wash (#F6FCF8 vs today’s #ECFAF0) plus the left bar. Keeps a hint of fill, far calmer.' },
+  { mod: 'ccard--sv-quiet', tag: 'D', name: 'Quiet — pill only', note: 'Fully neutral card. Success rides entirely on the green “Enrolled” pill and the green “View enrollment” cue.' },
+  { mod: 'ccard--sv-rail', tag: 'E', name: 'Tinted status rail', note: 'Body stays white; only the right-hand status column gets the green tint. Concentrates the color where the state lives.' },
+];
+
+document.getElementById('slList').innerHTML = VARIANTS.map(function (v) {
+  return '<section class="sl-variant' + (v.current ? ' sl-variant--current' : '') + '">' +
+    '<div class="sl-variant__head">' +
+      '<span class="sl-variant__tag">' + v.tag + '</span>' +
+      '<span class="sl-variant__name">' + v.name + '</span>' +
+      '<span class="sl-variant__note">' + v.note + '</span>' +
+    '</div>' +
+    card(v.mod) +
+  '</section>';
+}).join('');
+</script>
+</body>
+</html>
