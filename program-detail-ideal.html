@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registered Nursing (RN) · Your path · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=42">
+<link rel="stylesheet" href="assets/styles.css?v=43">
 <style>
   /* ============================================================
      Program detail V2 (concept) — "pathway spine".
@@ -205,8 +205,10 @@
     </div>
 
     <div class="joined-status" id="joinedStatus">
-      <span class="js-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span>
-      <div>You're a <b>Collaborative student</b> on this pathway. Pick up where you left off below.</div>
+      <div class="notice notice--success">
+        <span class="notice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span>
+        <div>You're a <b>Collaborative student</b> on this pathway. Pick up where you left off below.</div>
+      </div>
     </div>
 
     <!-- Progress + pathway appear after the student joins (LN-35) -->
@@ -340,7 +342,7 @@
     </div>
   </div>
 </main>
-<script src="assets/app.js?v=42"></script>
+<script src="assets/app.js?v=43"></script>
 <script>
 mountStudentChrome('collaboratives');
 document.querySelectorAll('.pw-card[role="button"]').forEach(function (c) {

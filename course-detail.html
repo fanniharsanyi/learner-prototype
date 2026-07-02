@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Course detail · CVC Exchange</title>
-<link rel="stylesheet" href="assets/styles.css?v=42">
+<link rel="stylesheet" href="assets/styles.css?v=43">
 </head>
 <body>
 <main>
@@ -37,9 +37,9 @@
           <div id="cdPrereqWrap" hidden>
             <h3 class="cd-h3">Prerequisites:</h3>
             <p class="cd-prereq-text" id="cdPrereqText"></p>
-            <div class="cd-alert" role="note">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
-              This course has prerequisites that must be verified
+            <div class="notice notice--warning" role="note">
+              <span class="notice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+              <div>This course has prerequisites that must be verified</div>
             </div>
           </div>
         </div>
@@ -81,13 +81,13 @@
     <!-- Course sections -->
     <section class="cd-sections">
       <h2 class="cd-h2">Course Sections</h2>
-      <div class="cd-alert" role="note">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
-        Seat counts change rapidly; these numbers may not reflect current seat availability.
+      <div class="notice notice--warning" role="note">
+        <span class="notice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+        <div>Seat counts change rapidly; these numbers may not reflect current seat availability.</div>
       </div>
-      <div class="cd-alert" id="cdPrereqAlert" role="note" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
-        This course has prerequisites that must be verified
+      <div class="notice notice--warning" id="cdPrereqAlert" role="note" hidden>
+        <span class="notice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+        <div>This course has prerequisites that must be verified</div>
       </div>
 
       <div id="cdSectionList"></div>
@@ -96,7 +96,7 @@
     <p class="cd-faq">Questions? <a href="#" onclick="toastNow('Opens the FAQ');return false;">Visit our FAQ section</a></p>
   </div>
 </main>
-<script src="assets/app.js?v=42"></script>
+<script src="assets/app.js?v=43"></script>
 <script>
 mountStudentChrome('collaboratives');
 
